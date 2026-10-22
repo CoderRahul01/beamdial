@@ -42,7 +42,7 @@ This is the part that makes a tool people actually keep using. Anyone can call a
 | Pure-Python runtime | Installs anywhere, even in serverless | No numpy speedups (not needed at this size) |
 | Monotone smoothing of estimates | Stable, sensible picks | Can't express "higher is worse" even where it really happens |
 | Escalation uses only checks a developer can see | Honest simulation | Lower measured gains than using hidden tests would show |
-| Grading runs in a sandbox, collection on the Mac | Model-written code never runs on your machine | Extra step to move files across |
+| Grading runs in a sandbox, collection anywhere | Model-written code never runs on a machine you care about | Extra step to move files across |
 | Default target 0.85, fallback `medium`, max 3 attempts | Sensible middle ground | Users with strict needs must tune them |
 
 ## The big trade-offs, explained
@@ -55,10 +55,9 @@ This is the part that makes a tool people actually keep using. Anyone can call a
 
 **General vs specific.** Training on math and code gives clean labels but narrow coverage. The fallback level is the safety valve. Adding agent and JSON tasks is the most valuable next step.
 
-## What the pilot already tells us (and why it matters for the design)
+## What the data says about the design
 
-- `low` already solved 13 of 14. Beam is efficient by default.
-- Token use barely changed with the level on most tasks. Either the provider ignores the setting, or Beam decides its own thinking budget.
-- If the setting doesn't matter, a router has nothing to route. The useful parts become: the finding itself, truncation and multi-turn fixes, and check-based escalation.
-
-That's why the [probe](04-the-probe.md) comes before the full run.
+- On standard math and code, `low` ties `max`, so on that kind of traffic the router mostly picks `low`. That's the correct answer, not a bug.
+- The setting clearly changes how long Beam thinks (2.2× more reasoning at `max` on competition math), so a router has something to work with on harder traffic.
+- The long-think option matched "always use `high`" when its threshold was picked on held-out data (97.2% vs 97.3%). It isn't better yet, so it ships turned off.
+- Because standard benchmarks may be partly memorized, the honest way to decide for your own app is `beamdial calibrate` on your own prompts.

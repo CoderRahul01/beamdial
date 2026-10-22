@@ -23,7 +23,7 @@ if grep -rInE "hf_[A-Za-z0-9]{30,}|sk-[A-Za-z0-9]{30,}" --exclude-dir=.git --exc
 fi
 
 # 2. Fill the OWNER placeholder in links and badges.
-grep -rl "OWNER/beamdial" README.md docs space 2>/dev/null | while read -r f; do
+{ grep -rl "OWNER/beamdial" README.md docs space_static 2>/dev/null || true; } | while read -r f; do
   perl -pi -e "s#OWNER/beamdial#$REPO#g" "$f"
 done
 
@@ -51,5 +51,11 @@ fi
 
 # 5. Topics so people can find it.
 gh repo edit "$REPO" --add-topic beam,reflection-ai,huggingface,llm,reasoning-models,llm-router,test-time-compute,cost-optimization,inference,openai-compatible,ai-agents,benchmark,python
+
+# 6. Tagged release, only when public and not already released.
+VERSION="v$(python3 -c "import re;print(re.search(r'version = \"([^\"]+)\"', open('pyproject.toml').read()).group(1))")"
+if [ "$VISIBILITY" = "public" ] && ! gh release view "$VERSION" --repo "$REPO" >/dev/null 2>&1; then
+  gh release create "$VERSION" --repo "$REPO" --title "BeamDial $VERSION" --notes-file .github/release-notes.md
+fi
 
 echo "Done: https://github.com/$REPO"

@@ -1,122 +1,98 @@
-# Results so far and the road to v0.2
+# Results and roadmap
 
 ## v0.1 in one paragraph
 
-We ran 410 tasks at all 5 reasoning levels on Beam (Baseten via Hugging Face), 2,050 graded runs, for about $3.50. **On standard benchmarks, `low` is as accurate as `max` (96.3% vs 96.6%, no significant difference) for 55% of the tokens.** The dial works: on competition math, `max` uses 2.2× the tokens of `low`. But on these tasks, the extra thinking doesn't buy extra right answers. Most of the remaining "failures" are bugs in the benchmarks themselves, not Beam.
+410 tasks with known answers, each run at all five reasoning levels on Beam 1.0 (501B A23B) through Hugging Face, pinned to Baseten. 2,050 graded runs, about $3.50. On standard math and code, `low` is as accurate as `max` (96.3% vs 96.6%, no significant difference) and uses 55% of the tokens. The setting does change how long Beam thinks. On these tasks the extra thinking just doesn't buy more right answers.
 
-## The numbers
+## Numbers
 
-| Level | Accuracy (410 tasks) | Accuracy (404 clean tasks) | Tokens per task | vs max |
+| Level | Accuracy (410) | Accuracy (404 clean) | Tokens per task | vs max |
 |---|---|---|---|---|
-| low | 96.3% | 97.8% | 914 | 55% of the tokens |
+| low | 96.3% | 97.8% | 914 | 55% |
 | medium | 96.1% | 97.5% | 1,236 | 75% |
 | high | 97.3% | 98.8% | 1,471 | 89% |
 | xhigh | 97.3% | 98.8% | 1,603 | 97% |
 | max | 96.6% | 98.0% | 1,657 | 100% |
 
-- The 95% error bar on each accuracy is about ±2 points, so all five levels are statistically tied.
-- Head to head, low vs max: low wrong but max right on 4 tasks, low right but max wrong on 3. Basically a coin flip (p = 1.0).
-- 384 of 410 tasks were solved at **every** level. Only 18 tasks flip between levels.
-- Thinking does scale with the level where it can: on AMC/AIME/Olympiad, mean tokens go from 1,756 at `low` to 3,873 at `max`. On easy tasks, Beam ignores the dial and answers short.
+- 95% Wilson intervals are about ±2 points, so the five levels are statistically tied.
+- `low` vs `max`: 4 tasks only `max` solved, 3 only `low` solved (exact McNemar p = 1.0). 384 of 410 tasks were solved at every level.
+- On AMC / AIME 2024 / OlympiadBench, mean completion tokens go from 1,756 at `low` to 3,873 at `max`. On easy tasks Beam answers short at every level.
+- Median latency was about 1.1 s at every level. Means differ only because of a long tail of hard prompts.
 
-## Three things we found that nobody else has published
+## Findings
 
-1. **`low` is enough for standard math and code on Beam.** Using `max` by default costs about 1.8× the tokens for the same accuracy.
-2. **Beam's own thinking length is a free difficulty signal.** On the 23 tasks where `low` spent more than 3,000 reasoning tokens, `low` was right 83% of the time, `high` 100% and `max` 87%. A check-free policy, "use `low`, re-ask at `high` if low thought long", hit 97.3% at 88% of max's tokens, tied with the best fixed level. It's small data (23 such tasks), so v0.2 must confirm it.
-3. **6 of the 8 tasks no level could solve are benchmark bugs.** One GSM8K reference answer is wrong. Five MBPP hidden tests demand things the prompt never states (return `None` not `False`, a specific permutation order). All listed in `data/flagged_tasks.json`.
+1. **`low` is enough for standard math and code on Beam.** Defaulting to `max` costs about 1.8× the tokens for the same accuracy on this kind of task.
+2. **6 of the 8 tasks no level solved are benchmark bugs.** One GSM8K reference answer is wrong, and five MBPP hidden tests expect behavior the prompt doesn't state. All listed in `data/flagged_tasks.json`.
+3. **Long thinking at `low` hints at a hard prompt, but it's not proven useful yet.** On the 23 tasks where `low` used more than 3,000 reasoning tokens, `low` was right 83% of the time and `high` 100% (4 vs 0 discordant, p = 0.13). As a policy, "use `low`, re-ask at `high` when it thinks long", with the threshold picked on held-out folds, scored 97.2% at 1,600 tokens per task. That ties "always use `high`" (97.3% at 1,471). It isn't better, so it ships as an off-by-default option.
 
-## Why this holds up (and where it stops)
+## Why this holds up, and where it stops
 
-People will push back with "your tasks are too easy, on frontier problems `max` wins". That may be true, and we say so. The claim is built to survive that:
+The likely pushback is "your tasks are too easy, on frontier problems max wins". That may be true, and nothing here claims otherwise.
 
-1. **Scoped claim.** Every headline says "on standard math and code". We never say "you never need max".
-2. **Uncertainty shown.** Every accuracy has a 95% interval, and low vs max has an exact significance test (p = 1.0).
-3. **Adaptive by design.** BeamDial doesn't lock you to `low`. The long-think signal and check-based escalation move up when a prompt is hard. If frontier problems need `max`, the policy reaches for it.
-4. **Everything public.** All 2,050 raw outputs, grades and code, so anyone can find a mistake. We already found and fixed one of our own.
-5. **Your prompts, your answer.** `python -m beamdial calibrate` measures the gap on the user's own traffic in minutes and prints the setting to use. Our benchmark is a starting point, not the final word.
-6. **v0.2 attacks our own claim.** Frontier math (AIME 2026, HMMT 2026, Apex) and fresh long-context tasks are chosen where the gap is most likely to appear.
+- **Scoped claim.** Every statement is about standard math and code.
+- **Uncertainty shown.** Intervals on every accuracy, exact tests on every head-to-head.
+- **Memorization.** These benchmarks are old and public. Beam has likely seen many of them, which can make `low` look better than it would on new problems.
+- **One provider, one sample per cell, temperature 0.7.**
+- **Router.** On this data the router's best move is almost always `low`. It only gets interesting on data where levels differ.
+- **Everything is public.** All 2,050 outputs, grades and code. One of our own mistakes is documented below.
+- **Your traffic, your answer.** `beamdial calibrate` measures the gap on your own prompts and prints the setting to use.
 
 ## A bug we caught in our own grader
 
-The first grading said 93.1%. The real number is 96.7%. The math checker (`math-verify`) refuses to run inside worker threads, and our grader quietly counted that as a wrong answer. So `\frac14` vs `\frac{1}{4}` was marked wrong. Fixed: math is graded in the main thread, grader errors are labelled instead of hidden, and 11 regression tests guard it. Every number above uses the fixed grader. Re-grading independently gave identical results.
+The first grading said 93.1%. The real number is 96.7%. `math-verify` uses `signal.alarm` for its timeout, which only works in the main thread. Our grader ran math checks in worker threads, the library raised an error, and the grader counted that as a wrong answer. So `\frac14` vs `\frac{1}{4}` was marked wrong.
 
-This is worth saying publicly. "Here's a bug we found in our own pipeline and how" builds more trust than "everything worked".
+The fix: math is graded in the main thread, grader errors are labelled instead of hidden, and regression tests cover both the equivalent forms and the threading case. Re-grading independently gave identical results row for row.
 
----
+## Next: v0.2
 
-## What v0.2 has to prove (the bar to cross)
+v0.1's tasks are too easy for Beam, so the setting can't show its value there. v0.2 goes where a gap is most likely:
 
-v0.1's tasks are too easy for Beam, so the dial can't show its value. v0.2 adds tasks where Beam isn't at 97%.
-
-| # | Target | Pass if | Why it matters |
+| Set | Tasks | What it tests | Memorization risk |
 |---|---|---|---|
-| 1 | **Find where the dial matters** | On the hard set, the best level beats `low` by ≥ 8 points, with p < 0.05 | Proves when `max` is worth paying for |
-| 2 | **BeamDial beats fixed levels** | A BeamDial policy gets within 1 point of the best fixed level at ≤ 70% of its tokens (out-of-fold) | Proves the tool saves money without losing quality |
-| 3 | **Confirm the free signal** | "Low, re-ask at high if it thinks long" stays on or above the fixed-level line on the hard set | The headline feature works with no checker |
-| 4 | **Honest null result, if it comes** | If even frontier problems show no gap, publish that as the finding | "You never need max on Beam" is a big claim and still a win |
+| AIME 2026 | 30 | recent competition math | before Beam's cutoff, possible |
+| HMMT Feb 2026 | 33 | harder competition math | before cutoff, possible |
+| Apex 2025 + Apex Shortlist | 59 | problems picked to be hard for frontier models | before cutoff, possible |
+| Long-context state tracking | 60 | follow variable updates through 8k to 32k token logs | none, generated fresh |
 
-## The v0.2 hard set (built, ready to run)
+The long-context tasks are generated by `scripts/build_longctx.py`. Each one is a service log with assignment lines hidden among ordinary log lines. The model has to process it top to bottom and report one variable's final value. Variables get reassigned before and after use, so grabbing the first match fails. Gold answers come from executing the log, and an independent replay checks every one.
 
-| Set | Tasks | What it tests | Contamination risk |
-|---|---|---|---|
-| AIME 2026 | 30 | Recent competition math | Before Beam's cutoff, may be seen |
-| HMMT Feb 2026 | 33 | Harder competition math | Before cutoff, may be seen |
-| Apex 2025 + Apex Shortlist | 59 | Problems picked to be hard for frontier models | Before cutoff, may be seen |
-| **Long-context state tracking** | 60 | Follow variable updates through 8k to 32k token logs, latest value wins | **None**: generated fresh, can't be memorized |
+### What v0.2 has to show
 
-The long-context set is our own invention. It tests exactly what breaks production agents: tracking state that changes over time across a long context (the stale-memory problem). It's also where Reflection's own blog showed `low` failing. Difficulty is dialed by log length (8k / 32k tokens) and number of updates (25 / 60 / 120). Every gold answer is computed by executing the log, then re-checked by an independent replay.
+| Target | Pass if |
+|---|---|
+| Find where the setting matters | best level beats `low` by at least 8 points, p < 0.05 |
+| BeamDial beats fixed levels | a BeamDial policy within 1 point of the best fixed level at no more than 70% of its tokens, out-of-fold |
+| Long-think signal | beats "always high" out-of-fold, or gets dropped |
+| Honest null | if frontier problems show no gap either, publish that |
 
-## How we push accuracy up (the levers)
+### Cost
 
-| Lever | Cost | Expected effect | Status |
-|---|---|---|---|
-| Fix grader false negatives | Free | +3.6 points of real accuracy | Done |
-| Flag broken benchmark tasks | Free | Clean ceiling is about 98 to 99% | Done |
-| Length-triggered re-ask (low → high) | Free to simulate; in use about 40 to 60% more tokens than plain `low`, still under `max` | +1 point on v0.1, likely more on hard tasks | Built into the library (`long_think_tokens=3000`) |
-| Majority vote of 3 at `low` | 3× low's tokens | Often beats one `max` run on hard math | Simulation ready, needs `--samples 3` at low |
-| Escalate on a failed check | Small | +0.5 points on v0.1 | Done |
-| Router trained on hard + easy data | Free after collection | Real routing instead of "always low" | Retrain after v0.2 |
-
-## What it will cost
-
-Measured on your run: Baseten via Hugging Face, AIME 2024 averaged about 4,950 output tokens per call across levels. The frontier sets are harder, so the range assumes 1× to 2.5× that. Long-context costs are mostly input tokens (about 1.4M per level pass). Prices are $0.40 per 1M input and $1.20 per 1M output (the script's defaults). **Check your real charges on the Hugging Face billing page**, since the provider's actual price may differ.
+Measured on v0.1: AIME 2024 averaged about 4,950 output tokens per call across levels. The frontier sets are harder, so the estimates assume 1× to 2.5× that. Long context is mostly input tokens. The live version of this math is the `v0.2 cost plan` sheet in `results/BeamDial-results-v0.1.xlsx`.
 
 | Plan | What runs | Calls | Estimated cost |
 |---|---|---|---|
 | Pilot | 2 tasks per source × 5 levels | 60 | $0.50 to $0.90 |
-| A. Lean | Hard set × 5 levels, 1 sample | 910 | $7 to $14 |
-| **B. Solid (recommended)** | A + 2 extra `low` samples on frontier math (for majority vote) | 1,154 | **$9 to $17** |
-| C. Strong | 2 samples everywhere + vote samples | 2,064 | $16 to $31 |
+| Lean | hard set × 5 levels, 1 sample | 910 | $7 to $14 |
+| Solid | lean + 2 extra `low` samples on frontier math | 1,154 | $9 to $17 |
+| Strong | 2 samples everywhere + extra `low` samples | 2,064 | $16 to $31 |
 
-Spent so far (estimated): pilot $0.22 + probe $0.15 + full run $3.51 ≈ **$3.90**. That leaves roughly **$21** of the $25. The live version of this math is the `v0.2 cost plan` sheet in `results/BeamDial-results-v0.1.xlsx`; edit its yellow cells.
-
-**Recommendation: Pilot, then Plan B, with `--budget-usd` set as a hard stop.** The collector halts at the budget and resumes later, so overspending isn't possible beyond the calls already in flight.
-
-## Run order for v0.2
+### Commands
 
 ```bash
-cd "/Volumes/Powerhouse/Agentic Systems/beamdial"
-export HF_TOKEN=...   # never paste this line anywhere
 M=reflection/Beam-1.0-501B-A23B:baseten
+python scripts/fetch_frontier.py      # AIME 2026, HMMT Feb 2026, Apex -> data/tasks_frontier.jsonl
+python scripts/build_longctx.py       # the 60 long-context tasks
 
-python3 scripts/fetch_frontier.py                     # downloads AIME 2026, HMMT 2026, Apex -> data/tasks_frontier.jsonl
-python3 scripts/build_longctx.py                      # already built, re-creates the same 60 tasks
-
-# pilot (about $0.50 to $0.90): paste the summary table
-python3 scripts/collect.py --pilot --tasks data/tasks_frontier.jsonl --out data/pilot_frontier.jsonl --model $M --max-tokens 64000
-python3 scripts/collect.py --pilot --tasks data/tasks_longctx.jsonl  --out data/pilot_longctx.jsonl  --model $M
-
-# Plan B (only after the pilot looks sane)
-python3 scripts/collect.py --tasks data/tasks_frontier.jsonl --out data/runs_frontier.jsonl --model $M --max-tokens 64000 --budget-usd 11
-python3 scripts/collect.py --tasks data/tasks_frontier.jsonl --out data/runs_frontier.jsonl --model $M --max-tokens 64000 --levels low --samples 3 --budget-usd 13
-python3 scripts/collect.py --tasks data/tasks_longctx.jsonl  --out data/runs_longctx.jsonl  --model $M --budget-usd 5
+python scripts/collect.py --pilot --tasks data/tasks_frontier.jsonl --out data/pilot_frontier.jsonl --model $M --max-tokens 64000
+python scripts/collect.py --tasks data/tasks_frontier.jsonl --out data/runs_frontier.jsonl --model $M --max-tokens 64000 --budget-usd 11
+python scripts/collect.py --tasks data/tasks_longctx.jsonl --out data/runs_longctx.jsonl --model $M --budget-usd 5
 ```
 
-`--budget-usd` counts everything already in that output file, so the second frontier command stops at $13 total for that file, not $13 more. Grading, training and charts happen in my sandbox: send the run files over and I'll do the rest.
+`--budget-usd` counts everything already in the output file, so a rerun never spends past it.
 
-## What's still missing (honest list)
+## Still missing
 
-- **Agent and tool-calling tasks.** That's where Beam is mostly used, and where the level may matter most. Next after v0.2.
-- **Code at frontier difficulty** (LiveCodeBench hard). Its test harness is heavy, so it's planned for after the hackathon.
-- **One provider only.** Only Baseten serves Beam on HF right now. Other providers (or Reflection's own API) could behave differently.
-- **Async client and streaming** in the library.
+- Agent and tool-calling tasks, where Beam is mostly used
+- Frontier-difficulty code (LiveCodeBench hard)
+- More providers, or Reflection's own API
+- Async client and streaming in the library

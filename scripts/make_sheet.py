@@ -235,7 +235,7 @@ lines = [
     "Data: 410 tasks (GSM8K 40, MATH L1-5 160, AMC 2023 40, AIME 2024 30, OlympiadBench 40, HumanEval 50, MBPP 50), each run at all 5 reasoning levels.",
     "Grading: math with math-verify on the last \\boxed{} answer, code with the benchmark's own tests in a sandbox.",
     "Grader fix: an earlier grading under-counted math (93.1%). This workbook uses the fixed grader (96.7% over all runs).",
-    "Code and data: github.com/OWNER/beamdial (link filled in at launch)",
+    "Code: https://github.com/CoderRahul01/beamdial  Data: https://huggingface.co/datasets/PengoSword123/beamdial-v0.1",
 ]
 for i, t in enumerate(lines, 1):
     ab.cell(row=i, column=1, value=t).font = Font(name=F, bold=(i == 1), size=13 if i == 1 else 10)

@@ -15,7 +15,29 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - run: pip install pytest
-      - run: python -m pytest -q tests
-      - name: library imports with zero dependencies
-        run: python -c "import beamdial; print(beamdial.__version__)"
+      - name: unit tests
+        run: |
+          pip install pytest
+          python -m pytest -q tests
+      - name: build and install the wheel in a clean environment
+        run: |
+          pip wheel --no-deps -w dist .
+          python -m venv /tmp/clean
+          /tmp/clean/bin/pip install dist/*.whl
+          cd /tmp
+          /tmp/clean/bin/beamdial --version
+          /tmp/clean/bin/beamdial "How many positive divisors does 3600 have?"
+          /tmp/clean/bin/python -c "from beamdial import BeamDial, Router; Router.load()"
+
+  browser-router:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: browser router matches the Python router
+        run: python scripts/check_js_parity.py

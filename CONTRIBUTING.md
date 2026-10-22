@@ -1,16 +1,10 @@
 # Contributing
 
-Thanks for helping. Short version:
-
-1. Open an issue first for anything bigger than a typo, so we agree on the approach.
+1. Open an issue first for anything bigger than a typo.
 2. Keep the library dependency-free. `beamdial/` must import with plain Python.
-3. Add a test in `tests/test_beamdial.py` for any behavior change. Run `python -m pytest -q`.
-4. Never commit API keys, tokens or raw provider responses that contain them.
-5. New task sources need an automatic grader, and the grader must pass on gold answers before any API spend.
+3. Add a test for any behavior change and run `python -m pytest -q`.
+4. If you touch `features.py` or `router.py`, update `space_static/router.js` too and run `python scripts/check_js_parity.py`.
+5. Never commit API keys or tokens.
+6. New task sources need an automatic grader that passes on the gold answers before any API spend.
 
-Good first contributions:
-
-- `AsyncBeamDial` for async clients
-- Streaming passthrough when no `verify` is set
-- New task families: tool calling, JSON output, long context
-- A `python -m beamdial check-provider` command that runs the probe for a user's own provider
+Good first contributions: an async client, streaming when no `verify` is set, tool-calling and JSON task sets.

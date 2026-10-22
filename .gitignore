@@ -15,3 +15,8 @@ data/*graded*.jsonl
 # your own notes and launch plan, not for the public repo
 private/
 _archive/
+
+# build output
+*.egg-info/
+build/
+dist/

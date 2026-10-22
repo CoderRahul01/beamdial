@@ -3,7 +3,7 @@
 Our benchmark says what is true on standard math and code. Your traffic may be harder or different.
 Calibrate answers the only question that matters for you: on my prompts, does more thinking buy right answers?
 
-    python -m beamdial calibrate my_prompts.jsonl --levels low,high,max --budget-usd 2
+    beamdial calibrate my_prompts.jsonl --levels low,high,max --budget-usd 2
 
 my_prompts.jsonl, one JSON object per line:
     {"prompt": "...", "answer": "42"}            # answer is optional if you pass --check
@@ -225,12 +225,22 @@ def main(argv=None):
     if bad or len(levels) < 2:
         ap.error(f"--levels needs at least two of {LEVELS}")
     levels = sorted(levels, key=LEVELS.index)
-    rows = [json.loads(l) for l in open(args.prompts) if l.strip()]
+    if not Path(args.prompts).is_file():
+        ap.error(f"file not found: {args.prompts}")
+    try:
+        rows = [json.loads(l) for l in open(args.prompts, encoding="utf-8") if l.strip()]
+    except json.JSONDecodeError as ex:
+        ap.error(f"{args.prompts} is not valid JSONL ({ex})")
+    if not rows or any("prompt" not in r for r in rows):
+        ap.error("every line needs a 'prompt' field")
     check = load_check(args.check)
     key = os.environ.get(args.api_key_env)
     if not key:
         ap.error(f"set {args.api_key_env} first")
-    from openai import OpenAI
+    try:
+        from openai import OpenAI
+    except ImportError:
+        ap.error("calibrate needs the openai package: pip install openai")
     client = OpenAI(base_url=args.base_url, api_key=key, timeout=900, max_retries=3)
     out = Path(args.out or (args.prompts + ".calibration.jsonl"))
     results, spent = run(client, args.model, rows, levels, out, args.max_tokens, args.price_in, args.price_out, args.budget_usd)

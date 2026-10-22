@@ -59,7 +59,7 @@ Key fields in `runs`: `task_id`, `source`, `family`, `effort`, `content`, `reaso
 - **Tasks:** GSM8K (40), MATH levels 1 to 5 (160), AMC 2023 (40), AIME 2024 (30), OlympiadBench numeric (40), HumanEval (50), MBPP test split (50). Sampled with a fixed seed.
 - **Model and serving:** `reflection/Beam-1.0-501B-A23B` through Hugging Face Inference Providers, pinned to Baseten. Temperature 0.7, `max_completion_tokens` 32,000, one sample per task per level, October 22, 2026.
 - **Grading:** math via [math-verify](https://github.com/huggingface/Math-Verify) on the last `\boxed{}` answer; code by running the benchmark's own tests in an isolated process with a timeout. `public_pass` records only the test a developer could see (the MBPP example or the HumanEval docstring examples).
-- **Code:** everything to reproduce, re-grade and re-chart is at github.com/OWNER/beamdial.
+- **Code:** everything to reproduce, re-grade and re-chart is at https://github.com/OWNER/beamdial
 
 ## Known limits
 
@@ -67,6 +67,9 @@ Key fields in `runs`: `task_id`, `source`, `family`, `effort`, `content`, `reaso
 - Math and Python only. Agent, tool-calling and long-context tasks are coming in v0.2.
 - One provider (Baseten). Other servers may treat `reasoning_effort` differently.
 - 6 tasks are flagged as broken benchmark items (one wrong GSM8K reference, five underspecified MBPP tests). Excluding them, `low` scores 97.8%.
+- These benchmarks are old and public, so Beam has likely seen many of them in training. That can make `low` look better than it would on new problems.
+- Median latency was about 1.1 s at every level. Means differ only because of a long tail of hard prompts.
+- The "re-ask at high when low thinks long" policy in `results/summary.json` uses a threshold picked on this data. With the threshold picked on held-out folds it scores 97.2%, a tie with always using `high`.
 - An early version of our grader under-counted math answers (math-verify cannot run in worker threads). This release uses the fixed grader. The fix and regression tests are in the repo.
 
 ## License

@@ -89,8 +89,8 @@
   <p class="lede">Beam has five reasoning levels. On standard math and code, <b>low</b> matches <b>max</b> for about half the tokens.
     BeamDial picks the level per request, escalates when a prompt looks hard, and lets you measure the gap on your own prompts.</p>
   <div class="links">
-    <a href="https://github.com/OWNER/beamdial" target="_blank" rel="noopener">GitHub</a>
-    <a href="https://huggingface.co/datasets/HFUSER/beamdial-v0.1" target="_blank" rel="noopener">Dataset · 2,050 runs</a>
+    <a href="https://github.com/CoderRahul01/beamdial" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://huggingface.co/datasets/PengoSword123/beamdial-v0.1" target="_blank" rel="noopener">Dataset · 2,050 runs</a>
     <a href="https://huggingface.co/reflection/Beam-1.0-501B-A23B" target="_blank" rel="noopener">Beam model</a>
   </div>
   <div class="stats" id="stats"></div>
@@ -124,14 +124,17 @@
     <h2>Every policy, replayed on real outputs</h2>
     <div class="card" style="overflow-x:auto"><table id="policies"></table></div>
     <h2>Where this claim stops</h2>
-    <p>Measured on standard math and Python benchmarks, where Beam already scores about 97%. Harder problems may need more thinking:
-      v0.2 tests frontier math (AIME 2026, HMMT 2026, Apex) and long-context state tracking. One provider (Baseten), one sample per
-      cell, temperature 0.7. For your own traffic, run <code>calibrate</code> (next tab).</p>
+    <p>Measured on standard math and Python benchmarks, where Beam already scores about 97%. These benchmarks are old and public,
+      so Beam has likely seen many of them, which can make low look better than it would on new problems. Harder problems may need
+      more thinking: the next run covers frontier math (AIME 2026, HMMT 2026, Apex) and freshly generated long-context tasks.
+      One provider (Baseten), one sample per cell, temperature 0.7.</p>
+    <p>The "re-ask at high if low thinks long" row uses a threshold picked on this data. Picked on held-out folds instead, it scores
+      97.2%, a tie with always using high, so it ships turned off. For your own traffic, run <code>beamdial calibrate</code> (next tab).</p>
   </section>
 
   <section class="panel" id="code" role="tabpanel">
     <h2>Install</h2>
-    <pre>pip install "git+https://github.com/OWNER/beamdial"</pre>
+    <pre>pip install "git+https://github.com/CoderRahul01/beamdial"</pre>
     <h2>Wrap your client</h2>
 <pre>from openai import OpenAI
 from beamdial import BeamDial
@@ -143,13 +146,13 @@ print(res.effort, res.total_tokens, res.content)
 # escalate only when your own check fails
 res = beam.create(messages=msgs, verify=lambda text: my_tests_pass(text))
 
-# re-ask at high when low thinks unusually long (no checker needed)
-beam = BeamDial(client, policy="cascade", start="low", long_think_tokens=3000)</pre>
+# keep follow-up turns valid: Beam needs reasoning_content on every assistant turn
+msgs.append(res.to_message())</pre>
     <h2>Measure the gap on your own prompts</h2>
-    <p>Our benchmark is a starting point. <code>calibrate</code> runs your prompts at each level, tests whether the gap is real,
-      and prints the cheapest setting that keeps your accuracy.</p>
+    <p>My benchmark is a starting point. <code>calibrate</code> runs your prompts at each level, tests whether the gap is real,
+      and prints the cheapest setting that keeps your accuracy. It needs <code>pip install openai</code>.</p>
 <pre># my_prompts.jsonl: {"prompt": "...", "answer": "..."} per line
-python -m beamdial calibrate my_prompts.jsonl --levels low,high,max --budget-usd 2</pre>
+beamdial calibrate my_prompts.jsonl --levels low,high,max --budget-usd 2</pre>
   </section>
 
   <footer>BeamDial · 410 tasks × 5 levels = 2,050 graded runs on Beam 1.0 (501B A23B) via Hugging Face, Baseten. Apache 2.0.</footer>

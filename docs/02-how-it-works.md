@@ -3,7 +3,7 @@
 There are two halves:
 
 - **The research pipeline** (`scripts/`). It runs once. It turns tasks into measurements, measurements into a trained router, and the router into charts and a report.
-- **The product** (`beamdial/` and `space/`). This is what users install or click. It only reads the trained router file.
+- **The product** (`beamdial/` and `space_static/`). This is what users install or click. It only reads the trained router file.
 
 ```
 tasks.jsonl ──> collect.py ──> runs.jsonl ──> grade.py ──> graded.jsonl ──┬──> train_router.py ──> router_weights.json ──> beamdial library
@@ -13,8 +13,8 @@ tasks.jsonl ──> collect.py ──> runs.jsonl ──> grade.py ──> grade
 
 Why it's split like this:
 
-- `collect.py` only talks to the API, so it's safe to run on your Mac.
-- `grade.py` **runs code that Beam wrote**, so it runs in a sandbox (my cloud workspace), never on your laptop.
+- `collect.py` only talks to the API, so it's safe to run anywhere.
+- `grade.py` **runs code that Beam wrote**, so run it in a sandbox (a container or a throwaway VM), not on a machine you care about.
 - Everything after collection is offline. We can re-grade, retrain and re-chart for free, as many times as we like.
 
 Below is every file, what it does, and the lines that matter. Line numbers drift as code changes, so the code is quoted instead.
@@ -283,7 +283,7 @@ Strategies compared:
 - **agreement cascade**: for math, run two levels and stop when they agree. Costs at least 2 calls but needs no checker.
 - **router @ target**: BeamDial's pick, with and without escalation, scored out-of-fold.
 
-Outputs: `report.md` (tables), `pareto.png` (accuracy vs tokens, the main chart), `levels.png` (tokens and accuracy per level per task group), `summary.json` (every number, for the Space).
+Outputs: `report.md` (tables), `pareto.png` (accuracy vs tokens, the main chart), `levels.png` (tokens and accuracy per level per task group), `summary.json` (every number, used by the demo).
 
 ---
 
@@ -293,20 +293,17 @@ Explained line by line in [the probe](04-the-probe.md).
 
 ---
 
-## space/app.py
+## space_static/
 
-The Hugging Face Space, built with Gradio. Three tabs:
-- **Pick a level**: paste a prompt, see the per-level estimate and the pick. Optional live run with the visitor's **own** HF token, used once and never stored.
-- **Results**: the charts and tables from `results/`.
-- **Use it in code**: copy-paste snippet.
-
-It runs on a free CPU Space, since the router needs no GPU.
+The demo is a static page. `router.js` is a line-for-line port of `features.py` and `router.py`, so the router runs in the visitor's browser and the prompt is never sent anywhere. `scripts/check_js_parity.py` runs both versions on every task in the dataset and fails if any pick differs or any probability differs by more than 1e-9.
 
 ---
 
 ## tests/
 
-- `test_beamdial.py`: 14 unit tests with a fake Beam client: router picks, out-of-domain fallback, escalation order, attempt cap, tool calls, truncation, `to_message`, cost.
-- `mock_server.py`: a fake OpenAI-compatible server. It let us run the whole pipeline end to end (collect, grade, train, analyze, Space) before spending a cent.
+- `test_beamdial.py`: the wrapper and router with a fake Beam client: router picks, out-of-domain fallback, escalation order, attempt cap, tool calls, truncation, `to_message`, cost, the long-think option.
+- `test_graders.py`: equivalent math answers must grade as correct, and the grader must refuse to run where math-verify silently fails.
+- `test_calibrate.py`: the calibrate analysis, including the case where a user's check is broken.
+- `mock_server.py`: a fake OpenAI-compatible server, used to run the whole pipeline end to end before spending anything.
 
 Run them with `python -m pytest -q`.

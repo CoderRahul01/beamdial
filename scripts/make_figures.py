@@ -98,7 +98,7 @@ def fig_hero():
             f"<h1 style='font-size:52px'>On standard math and code, Beam's low matches max.</h1>"
             f"<div class='sub'>{F['n_tasks']} graded math and code tasks, each run at all five reasoning levels. "
             f"Every level lands within the same error bars. <b style='color:{INK}'>low</b> gets there with "
-            f"{share:.0f}% of the tokens and answers {speed:.1f}× faster. Frontier and long-context tasks are next (v0.2).</div>"
+            f"{share:.0f}% of the tokens. Frontier and long-context tasks are next.</div>"
             f"<div style='display:flex;gap:48px;margin-top:44px'>"
             f"<div><div style='font-size:64px;font-weight:700;letter-spacing:-0.03em'>{o['low']['acc']:.1f}%</div>"
             f"<div style='font-size:17px;color:{INK2};margin-top:4px'>accuracy at low<br>(max: {o['max']['acc']:.1f}%)</div></div>"
@@ -183,7 +183,7 @@ def fig_frontier():
     head = ("<div class='eyebrow'>ALL 410 TASKS · EVERY POLICY REPLAYED ON REAL OUTPUTS</div>"
             "<h1 style='font-size:50px'>Same accuracy band. Very different bills.</h1>"
             "<div class='sub' style='max-width:1350px'>Every strategy lands within about two points, inside the error band. "
-            "What changes is cost: start at low and escalate only on a signal, and you pay close to low's price, not max's.</div>")
+            "What changes is cost. Starting at low and escalating only when a check fails costs close to low's price, not max's.</div>")
     svg = f"<svg style='position:absolute;left:88px;top:300px' width='1440' height='520'>{''.join(s)}</svg>"
     return page(head + svg)
 
@@ -194,20 +194,21 @@ def fig_signal():
     p = F["policies"]["low, high if low thinks >3000 tok"]
     mx = F["policies"]["fixed: max"]
     head = (f"<div class='eyebrow'>A FREE DIFFICULTY SIGNAL · NO CHECKER NEEDED</div>"
-            f"<h1>When low thinks long, ask again at high.</h1>"
+            f"<h1>When low thinks long, the prompt is probably hard.</h1>"
             f"<div class='sub' style='max-width:620px'>On the {lt['n']} tasks where low spent more than "
-            f"{fmt(lt['threshold'])} reasoning tokens, it was right {acc[0]:.0f}% of the time. high got all of them.</div>"
+            f"{fmt(lt['threshold'])} reasoning tokens, it was right {acc[0]:.0f}% of the time. high got all of them. "
+            f"Promising, not proven: n = {lt['n']}, p = 0.13.</div>"
             f"<div style='margin-top:40px;max-width:600px;padding:24px 28px;border:1px solid {GRID};border-radius:14px;background:#ffffff'>"
-            f"<div style='font-size:17px;color:{INK2}'>As a policy on all {F['n_tasks']} tasks</div>"
-            f"<div style='font-size:40px;font-weight:700;margin-top:6px;letter-spacing:-0.02em'>{p['acc']:.1f}% "
-            f"<span style='font-size:22px;font-weight:500;color:{INK2}'>at {100 * p['tokens'] / mx['tokens']:.0f}% of max's tokens</span></div>"
-            f"<div style='font-size:16px;color:{MUTED};margin-top:8px'>BeamDial: <code style='font-size:15px'>BeamDial(client, long_think_tokens=3000)</code></div>"
+            f"<div style='font-size:17px;color:{INK2}'>As a policy on all {F['n_tasks']} tasks, threshold picked on held-out data</div>"
+            f"<div style='font-size:40px;font-weight:700;margin-top:6px;letter-spacing:-0.02em'>97.2% "
+            f"<span style='font-size:22px;font-weight:500;color:{INK2}'>ties always-high (97.3%)</span></div>"
+            f"<div style='font-size:16px;color:{MUTED};margin-top:8px'>Not better than high yet. v0.2 tests it on frontier problems.</div>"
             f"</div>")
     head = f"<div style='position:absolute;left:88px;top:120px;width:640px'>{head}</div>"
     svg = (f"<svg style='position:absolute;left:800px;top:190px' width='720' height='520'>"
            + bars(60, 70, 620, 380, acc, L, 100, "high", f"Accuracy on the {lt['n']} long-thinking tasks (%)",
                   lambda v: f"{v:.0f}", ytick_step=25)
-           + f"<text x='60' y='510' font-size='14' fill='{MUTED}'>Small sample (n = {lt['n']}). v0.2 retests this on frontier problems.</text>"
+           + f"<text x='60' y='510' font-size='14' fill='{MUTED}'>low vs high on these tasks: 4 vs 0 discordant, exact McNemar p = 0.13.</text>"
            + "</svg>")
     return page(head + svg)
 
