@@ -1,0 +1,80 @@
+<!doctype html><html><head><meta charset='utf-8'><style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { width:1600px; height:900px; background:#fcfcfb; font-family:Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; color:#0b0b0b;
+       -webkit-font-smoothing:antialiased; }
+.page { position:relative; width:1600px; height:900px; padding:72px 88px; }
+.eyebrow { font-size:20px; font-weight:600; color:#2a78d6; letter-spacing:0.02em; }
+h1 { font-size:58px; line-height:1.08; font-weight:700; letter-spacing:-0.025em; margin-top:18px; }
+.sub { font-size:23px; line-height:1.45; color:#52514e; margin-top:20px; }
+.foot { position:absolute; left:88px; right:88px; bottom:44px; display:flex; justify-content:space-between;
+         font-size:16px; color:#898781; border-top:1px solid #e1e0d9; padding-top:18px; }
+.foot b { color:#0b0b0b; font-weight:700; }
+svg text { font-family:Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; }
+</style></head><body><div class='page'><div class='eyebrow'>COMPETITION MATH · AMC, AIME 2024, OLYMPIADBENCH · 110 TASKS</div><h1>The dial works. The accuracy doesn't move.</h1><div class='sub' style='max-width:1300px'>At max, Beam thinks 2.2× longer than at low on the hardest problems in the set. Accuracy stays inside the same error bars, so the extra thinking buys no measurable gain here.</div><svg style='position:absolute;left:88px;top:340px' width='1440' height='440'><text x='70' y='30' font-size='19' font-weight='600' fill='#0b0b0b'>Mean reasoning tokens per task</text>
+<line x1='70' x2='630' y1='350.0' y2='350.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='58' y='355.0' font-size='14' fill='#898781' text-anchor='end'>0</text>
+<line x1='70' x2='630' y1='282.5' y2='282.5' stroke='#e1e0d9' stroke-width='1'/>
+<text x='58' y='287.5' font-size='14' fill='#898781' text-anchor='end'>1,000</text>
+<line x1='70' x2='630' y1='215.0' y2='215.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='58' y='220.0' font-size='14' fill='#898781' text-anchor='end'>2,000</text>
+<line x1='70' x2='630' y1='147.5' y2='147.5' stroke='#e1e0d9' stroke-width='1'/>
+<text x='58' y='152.5' font-size='14' fill='#898781' text-anchor='end'>3,000</text>
+<line x1='70' x2='630' y1='80.0' y2='80.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='58' y='85.0' font-size='14' fill='#898781' text-anchor='end'>4,000</text>
+<line x1='70' x2='630' y1='350' y2='350' stroke='#c3c2b7' stroke-width='1.5'/>
+<path d='M94.6,350 V238.2 Q94.6,234.2 98.6,234.2 H153.4 Q157.4,234.2 157.4,238.2 V350 Z' fill='#c9c8c1'/>
+<text x='126.0' y='222.2' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>1,715</text>
+<text x='126.0' y='380' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>low</text>
+<path d='M206.6,350 V184.8 Q206.6,180.8 210.6,180.8 H265.4 Q269.4,180.8 269.4,184.8 V350 Z' fill='#c9c8c1'/>
+<text x='238.0' y='168.8' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>2,507</text>
+<text x='238.0' y='380' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>medium</text>
+<path d='M318.6,350 V142.1 Q318.6,138.1 322.6,138.1 H377.4 Q381.4,138.1 381.4,142.1 V350 Z' fill='#c9c8c1'/>
+<text x='350.0' y='126.1' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>3,139</text>
+<text x='350.0' y='380' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>high</text>
+<path d='M430.6,350 V112.9 Q430.6,108.9 434.6,108.9 H489.4 Q493.4,108.9 493.4,112.9 V350 Z' fill='#c9c8c1'/>
+<text x='462.0' y='96.9' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>3,572</text>
+<text x='462.0' y='380' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>xhigh</text>
+<path d='M542.6,350 V101.3 Q542.6,97.3 546.6,97.3 H601.4 Q605.4,97.3 605.4,101.3 V350 Z' fill='#2a78d6'/>
+<text x='574.0' y='85.3' font-size='18' font-weight='700' fill='#0b0b0b' text-anchor='middle'>3,744</text>
+<text x='574.0' y='380' font-size='16' fill='#0b0b0b' font-weight='600' text-anchor='middle'>max</text><text x='830' y='30' font-size='19' font-weight='600' fill='#0b0b0b'>Accuracy (%)</text>
+<line x1='830' x2='1390' y1='350.0' y2='350.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='818' y='355.0' font-size='14' fill='#898781' text-anchor='end'>0</text>
+<line x1='830' x2='1390' y1='282.5' y2='282.5' stroke='#e1e0d9' stroke-width='1'/>
+<text x='818' y='287.5' font-size='14' fill='#898781' text-anchor='end'>25</text>
+<line x1='830' x2='1390' y1='215.0' y2='215.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='818' y='220.0' font-size='14' fill='#898781' text-anchor='end'>50</text>
+<line x1='830' x2='1390' y1='147.5' y2='147.5' stroke='#e1e0d9' stroke-width='1'/>
+<text x='818' y='152.5' font-size='14' fill='#898781' text-anchor='end'>75</text>
+<line x1='830' x2='1390' y1='80.0' y2='80.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='818' y='85.0' font-size='14' fill='#898781' text-anchor='end'>100</text>
+<line x1='830' x2='1390' y1='350' y2='350' stroke='#c3c2b7' stroke-width='1.5'/>
+<path d='M854.6,350 V98.7 Q854.6,94.7 858.6,94.7 H913.4 Q917.4,94.7 917.4,98.7 V350 Z' fill='#c9c8c1'/>
+<line x1='886.0' x2='886.0' y1='110.8' y2='86.8' stroke='#52514e' stroke-width='1.5'/>
+<line x1='879.0' x2='893.0' y1='110.8' y2='110.8' stroke='#52514e' stroke-width='1.5'/>
+<line x1='879.0' x2='893.0' y1='86.8' y2='86.8' stroke='#52514e' stroke-width='1.5'/>
+<text x='886.0' y='74.8' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>94.5</text>
+<text x='886.0' y='380' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>low</text>
+<path d='M966.6,350 V96.3 Q966.6,92.3 970.6,92.3 H1025.4 Q1029.4,92.3 1029.4,96.3 V350 Z' fill='#c9c8c1'/>
+<line x1='998.0' x2='998.0' y1='107.5' y2='85.3' stroke='#52514e' stroke-width='1.5'/>
+<line x1='991.0' x2='1005.0' y1='107.5' y2='107.5' stroke='#52514e' stroke-width='1.5'/>
+<line x1='991.0' x2='1005.0' y1='85.3' y2='85.3' stroke='#52514e' stroke-width='1.5'/>
+<text x='998.0' y='73.3' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>95.5</text>
+<text x='998.0' y='380' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>medium</text>
+<path d='M1078.6,350 V88.9 Q1078.6,84.9 1082.6,84.9 H1137.4 Q1141.4,84.9 1141.4,88.9 V350 Z' fill='#c9c8c1'/>
+<line x1='1110.0' x2='1110.0' y1='97.2' y2='81.4' stroke='#52514e' stroke-width='1.5'/>
+<line x1='1103.0' x2='1117.0' y1='97.2' y2='97.2' stroke='#52514e' stroke-width='1.5'/>
+<line x1='1103.0' x2='1117.0' y1='81.4' y2='81.4' stroke='#52514e' stroke-width='1.5'/>
+<text x='1110.0' y='69.4' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>98.2</text>
+<text x='1110.0' y='380' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>high</text>
+<path d='M1190.6,350 V93.8 Q1190.6,89.8 1194.6,89.8 H1249.4 Q1253.4,89.8 1253.4,93.8 V350 Z' fill='#c9c8c1'/>
+<line x1='1222.0' x2='1222.0' y1='104.2' y2='83.8' stroke='#52514e' stroke-width='1.5'/>
+<line x1='1215.0' x2='1229.0' y1='104.2' y2='104.2' stroke='#52514e' stroke-width='1.5'/>
+<line x1='1215.0' x2='1229.0' y1='83.8' y2='83.8' stroke='#52514e' stroke-width='1.5'/>
+<text x='1222.0' y='71.8' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>96.4</text>
+<text x='1222.0' y='380' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>xhigh</text>
+<path d='M1302.6,350 V96.3 Q1302.6,92.3 1306.6,92.3 H1361.4 Q1365.4,92.3 1365.4,96.3 V350 Z' fill='#2a78d6'/>
+<line x1='1334.0' x2='1334.0' y1='107.5' y2='85.3' stroke='#52514e' stroke-width='1.5'/>
+<line x1='1327.0' x2='1341.0' y1='107.5' y2='107.5' stroke='#52514e' stroke-width='1.5'/>
+<line x1='1327.0' x2='1341.0' y1='85.3' y2='85.3' stroke='#52514e' stroke-width='1.5'/>
+<text x='1334.0' y='73.3' font-size='18' font-weight='700' fill='#0b0b0b' text-anchor='middle'>95.5</text>
+<text x='1334.0' y='380' font-size='16' fill='#0b0b0b' font-weight='600' text-anchor='middle'>max</text></svg><div class='foot'><span><b>BeamDial</b> &nbsp;·&nbsp; 410 tasks × 5 levels = 2,050 graded runs on Beam 1.0 (501B A23B) via Hugging Face, Baseten</span><span>Error bars: 95% Wilson interval</span></div></div></body></html>

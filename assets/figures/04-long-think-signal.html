@@ -1,0 +1,39 @@
+<!doctype html><html><head><meta charset='utf-8'><style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { width:1600px; height:900px; background:#fcfcfb; font-family:Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; color:#0b0b0b;
+       -webkit-font-smoothing:antialiased; }
+.page { position:relative; width:1600px; height:900px; padding:72px 88px; }
+.eyebrow { font-size:20px; font-weight:600; color:#2a78d6; letter-spacing:0.02em; }
+h1 { font-size:58px; line-height:1.08; font-weight:700; letter-spacing:-0.025em; margin-top:18px; }
+.sub { font-size:23px; line-height:1.45; color:#52514e; margin-top:20px; }
+.foot { position:absolute; left:88px; right:88px; bottom:44px; display:flex; justify-content:space-between;
+         font-size:16px; color:#898781; border-top:1px solid #e1e0d9; padding-top:18px; }
+.foot b { color:#0b0b0b; font-weight:700; }
+svg text { font-family:Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; }
+</style></head><body><div class='page'><div style='position:absolute;left:88px;top:120px;width:640px'><div class='eyebrow'>A FREE DIFFICULTY SIGNAL · NO CHECKER NEEDED</div><h1>When low thinks long, ask again at high.</h1><div class='sub' style='max-width:620px'>On the 23 tasks where low spent more than 3,000 reasoning tokens, it was right 83% of the time. high got all of them.</div><div style='margin-top:40px;max-width:600px;padding:24px 28px;border:1px solid #e1e0d9;border-radius:14px;background:#ffffff'><div style='font-size:17px;color:#52514e'>As a policy on all 410 tasks</div><div style='font-size:40px;font-weight:700;margin-top:6px;letter-spacing:-0.02em'>97.3% <span style='font-size:22px;font-weight:500;color:#52514e'>at 88% of max's tokens</span></div><div style='font-size:16px;color:#898781;margin-top:8px'>BeamDial: <code style='font-size:15px'>BeamDial(client, long_think_tokens=3000)</code></div></div></div><svg style='position:absolute;left:800px;top:190px' width='720' height='520'><text x='60' y='20' font-size='19' font-weight='600' fill='#0b0b0b'>Accuracy on the 23 long-thinking tasks (%)</text>
+<line x1='60' x2='680' y1='450.0' y2='450.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='48' y='455.0' font-size='14' fill='#898781' text-anchor='end'>0</text>
+<line x1='60' x2='680' y1='355.0' y2='355.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='48' y='360.0' font-size='14' fill='#898781' text-anchor='end'>25</text>
+<line x1='60' x2='680' y1='260.0' y2='260.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='48' y='265.0' font-size='14' fill='#898781' text-anchor='end'>50</text>
+<line x1='60' x2='680' y1='165.0' y2='165.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='48' y='170.0' font-size='14' fill='#898781' text-anchor='end'>75</text>
+<line x1='60' x2='680' y1='70.0' y2='70.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='48' y='75.0' font-size='14' fill='#898781' text-anchor='end'>100</text>
+<line x1='60' x2='680' y1='450' y2='450' stroke='#c3c2b7' stroke-width='1.5'/>
+<path d='M90.0,450 V140.1 Q90.0,136.1 94.0,136.1 H150.0 Q154.0,136.1 154.0,140.1 V450 Z' fill='#c9c8c1'/>
+<text x='122.0' y='124.1' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>83</text>
+<text x='122.0' y='480' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>low</text>
+<path d='M214.0,450 V107.0 Q214.0,103.0 218.0,103.0 H274.0 Q278.0,103.0 278.0,107.0 V450 Z' fill='#c9c8c1'/>
+<text x='246.0' y='91.0' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>91</text>
+<text x='246.0' y='480' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>medium</text>
+<path d='M338.0,450 V74.0 Q338.0,70.0 342.0,70.0 H398.0 Q402.0,70.0 402.0,74.0 V450 Z' fill='#2a78d6'/>
+<text x='370.0' y='58.0' font-size='18' font-weight='700' fill='#0b0b0b' text-anchor='middle'>100</text>
+<text x='370.0' y='480' font-size='16' fill='#0b0b0b' font-weight='600' text-anchor='middle'>high</text>
+<path d='M462.0,450 V107.0 Q462.0,103.0 466.0,103.0 H522.0 Q526.0,103.0 526.0,107.0 V450 Z' fill='#c9c8c1'/>
+<text x='494.0' y='91.0' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>91</text>
+<text x='494.0' y='480' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>xhigh</text>
+<path d='M586.0,450 V123.6 Q586.0,119.6 590.0,119.6 H646.0 Q650.0,119.6 650.0,123.6 V450 Z' fill='#c9c8c1'/>
+<text x='618.0' y='107.6' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>87</text>
+<text x='618.0' y='480' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>max</text><text x='60' y='510' font-size='14' fill='#898781'>Small sample (n = 23). v0.2 retests this on frontier problems.</text></svg><div class='foot'><span><b>BeamDial</b> &nbsp;·&nbsp; 410 tasks × 5 levels = 2,050 graded runs on Beam 1.0 (501B A23B) via Hugging Face, Baseten</span><span>Error bars: 95% Wilson interval</span></div></div></body></html>

@@ -1,0 +1,17 @@
+# secrets
+.env
+*.key
+
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# big or private data (raw runs go to the Hugging Face dataset, not git)
+data/raw/
+data/*runs*.jsonl
+data/*graded*.jsonl
+
+# your own notes and launch plan, not for the public repo
+private/
+_archive/

@@ -1,0 +1,6 @@
+openai>=1.40
+math-verify[antlr4_13_2]>=0.7
+numpy
+scipy
+scikit-learn
+matplotlib

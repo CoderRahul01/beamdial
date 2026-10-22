@@ -1,0 +1,11 @@
+{
+  "note": "Tasks whose reference answer or hidden tests are wrong or underspecified. Kept in the data, reported separately.",
+  "tasks": {
+    "gsm8k-749": "Reference solution computes 54/6 = 9 groups although the problem says six groups; the sensible answer is 6.",
+    "mbpp-143": "Third hidden test passes a single list instead of a tuple of lists and expects 1.",
+    "mbpp-160": "Hidden test expects one specific (x, y) pair and an exact tuple format the prompt does not state.",
+    "mbpp-327": "Hidden test expects (6, 6, 12), a degenerate triangle, to count as isosceles.",
+    "mbpp-374": "Hidden tests expect one specific, non-lexicographic permutation order.",
+    "mbpp-431": "Hidden test expects None (not False) when there is no common element."
+  }
+}

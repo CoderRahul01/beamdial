@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BeamDial</title>
+<meta name="description" content="Pick Beam's reasoning level per request. On standard math and code, low matches max for about half the tokens.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fcfcfb; --card: #ffffff; --ink: #0b0b0b; --ink2: #52514e; --muted: #898781; --line: #e1e0d9;
+    --accent: #2a78d6; --accent-soft: #eaf2fc; --gray: #c9c8c1; --code: #f4f4f1; --warn: #9a5b00; --warn-soft: #fff6e5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141413; --card: #1c1c1b; --ink: #f0efec; --ink2: #c3c2b7; --muted: #8f8d86; --line: #2f2f2c;
+      --accent: #5598e7; --accent-soft: #17263a; --gray: #4a4945; --code: #232321; --warn: #f0b54a; --warn-soft: #2b2312;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #141413; --card: #1c1c1b; --ink: #f0efec; --ink2: #c3c2b7; --muted: #8f8d86; --line: #2f2f2c;
+    --accent: #5598e7; --accent-soft: #17263a; --gray: #4a4945; --code: #232321; --warn: #f0b54a; --warn-soft: #2b2312;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+         -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 40px 16px 64px; }
+  .eyebrow { color: var(--accent); font-weight: 600; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+  h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.1; letter-spacing: -.025em; margin: 10px 0 12px; }
+  .lede { color: var(--ink2); font-size: 18px; max-width: 760px; margin: 0; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .links a { color: var(--ink); text-decoration: none; border: 1px solid var(--line); background: var(--card); border-radius: 999px;
+             padding: 6px 14px; font-size: 14px; font-weight: 500; }
+  .links a:hover { border-color: var(--accent); }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 28px 0 8px; }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+  .stat b { display: block; font-size: 30px; letter-spacing: -.02em; }
+  .stat span { color: var(--ink2); font-size: 14px; }
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin: 32px 0 24px; overflow-x: auto; }
+  .tabs button { background: none; border: 0; border-bottom: 2px solid transparent; color: var(--ink2); padding: 10px 14px;
+                 font: inherit; font-weight: 500; cursor: pointer; white-space: nowrap; }
+  .tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+  .panel { display: none; } .panel.on { display: block; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+  label { font-weight: 600; font-size: 14px; display: block; margin-bottom: 8px; }
+  textarea { width: 100%; min-height: 150px; resize: vertical; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px;
+             background: var(--bg); color: var(--ink); font: 15px/1.5 Inter, system-ui, sans-serif; }
+  textarea:focus, input:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .row { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-top: 16px; }
+  .row input[type=range] { flex: 1; min-width: 180px; accent-color: var(--accent); }
+  .pill { font-variant-numeric: tabular-nums; background: var(--accent-soft); color: var(--accent); font-weight: 600; border-radius: 8px;
+          padding: 2px 10px; }
+  .examples { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .examples button { border: 1px solid var(--line); background: var(--bg); color: var(--ink2); border-radius: 999px; padding: 6px 12px;
+                     font: 13px Inter, system-ui, sans-serif; cursor: pointer; }
+  .examples button:hover { color: var(--ink); border-color: var(--accent); }
+  .result { margin-top: 20px; }
+  .verdict { font-size: 20px; font-weight: 600; letter-spacing: -.01em; }
+  .verdict code { font-size: 18px; }
+  .sub { color: var(--ink2); margin: 6px 0 16px; }
+  .note { background: var(--warn-soft); color: var(--warn); border-radius: 10px; padding: 10px 14px; font-size: 14px; margin-bottom: 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 500; font-size: 13px; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.pick td { font-weight: 600; }
+  tr.pick td:first-child::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+                                   background: var(--accent); margin-right: 8px; }
+  .bar { height: 8px; border-radius: 4px; background: var(--gray); }
+  tr.pick .bar { background: var(--accent); }
+  .barcell { width: 32%; }
+  .privacy { color: var(--muted); font-size: 13px; margin-top: 14px; }
+  figure { margin: 0 0 20px; }
+  figure img { width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); display: block; }
+  pre { background: var(--code); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; overflow-x: auto;
+        font: 13.5px/1.6 "JetBrains Mono", ui-monospace, Menlo, monospace; }
+  code { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; font-size: .9em; }
+  h2 { font-size: 22px; letter-spacing: -.01em; margin: 28px 0 10px; }
+  h2:first-child { margin-top: 0; }
+  p { color: var(--ink2); }
+  footer { color: var(--muted); font-size: 13px; margin-top: 48px; border-top: 1px solid var(--line); padding-top: 16px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">BeamDial · Reflection Beam 1.0</div>
+  <h1>Pay for max thinking only when it helps.</h1>
+  <p class="lede">Beam has five reasoning levels. On standard math and code, <b>low</b> matches <b>max</b> for about half the tokens.
+    BeamDial picks the level per request, escalates when a prompt looks hard, and lets you measure the gap on your own prompts.</p>
+  <div class="links">
+    <a href="https://github.com/OWNER/beamdial" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://huggingface.co/datasets/HFUSER/beamdial-v0.1" target="_blank" rel="noopener">Dataset · 2,050 runs</a>
+    <a href="https://huggingface.co/reflection/Beam-1.0-501B-A23B" target="_blank" rel="noopener">Beam model</a>
+  </div>
+  <div class="stats" id="stats"></div>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="pick">Pick a level</button>
+    <button role="tab" aria-selected="false" data-tab="results">Results</button>
+    <button role="tab" aria-selected="false" data-tab="code">Use it in code</button>
+  </div>
+
+  <section class="panel on" id="pick" role="tabpanel">
+    <div class="card">
+      <label for="prompt">Your prompt</label>
+      <textarea id="prompt"></textarea>
+      <div class="examples" id="examples"></div>
+      <div class="row">
+        <label for="target" style="margin:0">Quality target</label>
+        <input type="range" id="target" min="0.5" max="0.97" step="0.01" value="0.85">
+        <span class="pill" id="targetVal">0.85</span>
+      </div>
+      <div class="result" id="result" aria-live="polite"></div>
+      <div class="privacy">Runs entirely in your browser. Your prompt is never sent anywhere.</div>
+    </div>
+  </section>
+
+  <section class="panel" id="results" role="tabpanel">
+    <figure><img src="figures/01-hero.png" alt="On standard math and code, Beam's low matches max: 96.3% vs 96.6% accuracy at 55% of the tokens"></figure>
+    <figure><img src="figures/02-dial-works.png" alt="On competition math, max thinks 2.2 times longer than low with no measurable accuracy gain"></figure>
+    <figure><img src="figures/03-policies.png" alt="All strategies land in the same accuracy band; costs differ"></figure>
+    <figure><img src="figures/04-long-think-signal.png" alt="When low thinks long, asking again at high fixed all 23 such tasks"></figure>
+    <h2>Every policy, replayed on real outputs</h2>
+    <div class="card" style="overflow-x:auto"><table id="policies"></table></div>
+    <h2>Where this claim stops</h2>
+    <p>Measured on standard math and Python benchmarks, where Beam already scores about 97%. Harder problems may need more thinking:
+      v0.2 tests frontier math (AIME 2026, HMMT 2026, Apex) and long-context state tracking. One provider (Baseten), one sample per
+      cell, temperature 0.7. For your own traffic, run <code>calibrate</code> (next tab).</p>
+  </section>
+
+  <section class="panel" id="code" role="tabpanel">
+    <h2>Install</h2>
+    <pre>pip install "git+https://github.com/OWNER/beamdial"</pre>
+    <h2>Wrap your client</h2>
+<pre>from openai import OpenAI
+from beamdial import BeamDial
+
+beam = BeamDial(OpenAI(base_url="https://router.huggingface.co/v1", api_key=HF_TOKEN))
+res = beam.create(messages=[{"role": "user", "content": prompt}])
+print(res.effort, res.total_tokens, res.content)
+
+# escalate only when your own check fails
+res = beam.create(messages=msgs, verify=lambda text: my_tests_pass(text))
+
+# re-ask at high when low thinks unusually long (no checker needed)
+beam = BeamDial(client, policy="cascade", start="low", long_think_tokens=3000)</pre>
+    <h2>Measure the gap on your own prompts</h2>
+    <p>Our benchmark is a starting point. <code>calibrate</code> runs your prompts at each level, tests whether the gap is real,
+      and prints the cheapest setting that keeps your accuracy.</p>
+<pre># my_prompts.jsonl: {"prompt": "...", "answer": "..."} per line
+python -m beamdial calibrate my_prompts.jsonl --levels low,high,max --budget-usd 2</pre>
+  </section>
+
+  <footer>BeamDial · 410 tasks × 5 levels = 2,050 graded runs on Beam 1.0 (501B A23B) via Hugging Face, Baseten. Apache 2.0.</footer>
+</div>
+
+<script type="module">
+import { Router, LEVELS } from "./router.js";
+
+const EXAMPLES = [
+  ["Easy arithmetic", "Solve the following problem. Put only the final answer inside \\boxed{}.\n\nA shop sells pens at $3 each. Mia buys 7 pens and pays with a $50 bill. How much change does she get?"],
+  ["Competition math", "Solve the following problem. Put only the final answer inside \\boxed{}.\n\nFind the number of ordered pairs of positive integers (a, b) with a + b = 1000 such that neither a nor b has a zero digit."],
+  ["Python", "Write a correct Python solution. Return the complete code in a single ```python code block.\n\nWrite a function that returns the second largest distinct value in a list, or None if it does not exist."],
+  ["Not math or code", "Write a short thank you note to my team for shipping the release on time."],
+];
+
+const $ = (id) => document.getElementById(id);
+const fmt = (n) => Math.round(n).toLocaleString("en-US");
+let router;
+
+function render() {
+  const text = $("prompt").value;
+  const target = Number($("target").value);
+  $("targetVal").textContent = target.toFixed(2);
+  if (!router) return;
+  if (!text.trim()) { $("result").innerHTML = ""; return; }
+  const c = router.explain(text, target);
+  const pick = c.inDomain ? c.effort : "medium";
+  const saved = 1 - c.tokens[pick] / Math.max(c.tokens.max, 1);
+  let head = c.inDomain
+    ? `<div class="verdict">Use <code>reasoning_effort="${pick}"</code></div>
+       <div class="sub">Estimated chance of a correct answer ${Math.round(100 * c.p)}%, about ${Math.round(100 * saved)}% fewer tokens than max on average for this kind of task.</div>`
+    : `<div class="note">This doesn't look like math or code, which is what the router was trained on, so its estimates would be guesses.
+       BeamDial uses its fallback level instead.</div><div class="verdict">Use <code>reasoning_effort="medium"</code></div><div class="sub">Fallback level.</div>`;
+  const maxTok = Math.max(...LEVELS.map((l) => c.tokens[l]), 1);
+  const rows = LEVELS.map((l) => `<tr class="${l === pick ? "pick" : ""}"><td>${l}</td>
+      <td class="num">${Math.round(100 * c.probs[l])}%</td><td class="num">${fmt(c.tokens[l])}</td>
+      <td class="barcell"><div class="bar" style="width:${(100 * c.tokens[l] / maxTok).toFixed(1)}%"></div></td></tr>`).join("");
+  $("result").innerHTML = head + `<table><thead><tr><th>Level</th><th class="num">Est. P(correct)</th><th class="num">Mean tokens</th><th>Cost</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+async function main() {
+  $("examples").innerHTML = EXAMPLES.map(([name], i) => `<button data-i="${i}">${name}</button>`).join("");
+  $("examples").addEventListener("click", (e) => {
+    const i = e.target.dataset.i; if (i === undefined) return;
+    $("prompt").value = EXAMPLES[i][1]; render();
+  });
+  $("prompt").value = EXAMPLES[1][1];
+  $("prompt").addEventListener("input", render);
+  $("target").addEventListener("input", render);
+  document.querySelectorAll(".tabs button").forEach((b) => b.addEventListener("click", () => {
+    document.querySelectorAll(".tabs button").forEach((x) => x.setAttribute("aria-selected", x === b));
+    document.querySelectorAll(".panel").forEach((p) => p.classList.toggle("on", p.id === b.dataset.tab));
+  }));
+
+  const [w, s] = await Promise.all([fetch("router_weights.json").then((r) => r.json()), fetch("summary.json").then((r) => r.json())]);
+  router = new Router(w);
+  render();
+
+  const P = Object.fromEntries(s.policies.map((p) => [p.policy, p]));
+  const low = P["fixed: low"], max = P["fixed: max"];
+  $("stats").innerHTML = [
+    [`${(100 * low.accuracy).toFixed(1)}%`, `accuracy at low (max: ${(100 * max.accuracy).toFixed(1)}%)`],
+    [`${Math.round(100 * (1 - low.tokens_per_task / max.tokens_per_task))}%`, "fewer tokens than max"],
+    [`${s.n_tasks * 5}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","), "graded runs, all public"],
+  ].map(([b, t]) => `<div class="stat"><b>${b}</b><span>${t}</span></div>`).join("");
+
+  const keep = ["fixed: low", "fixed: medium", "fixed: high", "fixed: xhigh", "fixed: max",
+    "low, high if low thinks >3000 tok", "cascade from low (check-based)", "agreement cascade", "oracle (upper bound)"];
+  $("policies").innerHTML = `<thead><tr><th>Policy</th><th class="num">Accuracy</th><th class="num">Tokens / task</th><th class="num">Calls / task</th></tr></thead><tbody>` +
+    keep.filter((k) => P[k]).map((k) => `<tr><td>${k}</td><td class="num">${(100 * P[k].accuracy).toFixed(1)}%</td>
+      <td class="num">${fmt(P[k].tokens_per_task)}</td><td class="num">${P[k].calls_per_task.toFixed(2)}</td></tr>`).join("") + "</tbody>";
+}
+main().catch((e) => { $("result").innerHTML = `<div class="note">Could not load the router: ${e.message}</div>`; });
+</script>
+</body>
+</html>

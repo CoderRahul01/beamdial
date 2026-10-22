@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340" role="img" aria-label="BeamDial: pick Beam's reasoning level per request">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0f1f"/>
+      <stop offset="1" stop-color="#141a33"/>
+    </linearGradient>
+    <linearGradient id="arc" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3ad0a6"/>
+      <stop offset="0.5" stop-color="#4f8cff"/>
+      <stop offset="1" stop-color="#a874ff"/>
+    </linearGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#b9c6ff"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#4f8cff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#4f8cff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="340" rx="18" fill="url(#bg)"/>
+  <circle cx="930" cy="250" r="230" fill="url(#glow)"/>
+
+  <!-- text -->
+  <g font-family="ui-sans-serif, -apple-system, Segoe UI, Inter, Helvetica, Arial, sans-serif">
+    <text x="70" y="118" font-size="68" font-weight="800" fill="url(#title)" letter-spacing="-1.5">BeamDial</text>
+    <text x="72" y="166" font-size="24" fill="#c9d2f0">Pick Beam's reasoning level per request.</text>
+    <text x="72" y="200" font-size="24" fill="#c9d2f0">Pay for <tspan fill="#a874ff" font-weight="700">max</tspan> thinking only when it helps.</text>
+    <g font-size="15" fill="#8d98bf" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+      <rect x="72" y="236" width="372" height="40" rx="8" fill="#0d1328" stroke="#2a3360"/>
+      <text x="90" y="262"><tspan fill="#3ad0a6">res</tspan> = beam.create(messages=msgs)</text>
+    </g>
+    <text x="72" y="306" font-size="14" fill="#6f7aa3">Router · escalation on failed checks · truncation + multi-turn fixes · open data</text>
+  </g>
+
+  <!-- dial -->
+  <g transform="translate(930 250)">
+    <path d="M -170 0 A 170 170 0 0 1 170 0" fill="none" stroke="#1f2747" stroke-width="26" stroke-linecap="round"/>
+    <path d="M -170 0 A 170 170 0 0 1 170 0" fill="none" stroke="url(#arc)" stroke-width="10" stroke-linecap="round" opacity="0.95"/>
+    <!-- ticks: low 180°, medium 135°, high 90°, xhigh 45°, max 0° -->
+    <g stroke="#d9e0ff" stroke-width="3" stroke-linecap="round">
+      <line x1="-150" y1="0" x2="-132" y2="0"/>
+      <line x1="-106" y1="-106" x2="-93" y2="-93"/>
+      <line x1="0" y1="-150" x2="0" y2="-132"/>
+      <line x1="106" y1="-106" x2="93" y2="-93"/>
+      <line x1="150" y1="0" x2="132" y2="0"/>
+    </g>
+    <g font-family="ui-sans-serif, -apple-system, Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="15" fill="#aab4da" text-anchor="middle">
+      <text x="-205" y="6">low</text>
+      <text x="-150" y="-140">medium</text>
+      <text x="0" y="-200">high</text>
+      <text x="150" y="-140">xhigh</text>
+      <text x="205" y="6">max</text>
+    </g>
+    <!-- needle: drawn pointing up (high), rotated per level -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate" dur="8s" repeatCount="indefinite"
+        values="-90;-90;0;0;-45;-45;90;90;-90"
+        keyTimes="0;0.18;0.25;0.43;0.5;0.68;0.75;0.93;1"
+        calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
+      <line x1="0" y1="0" x2="0" y2="-122" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="0" cy="-122" r="5" fill="#ffffff"/>
+    </g>
+    <circle r="16" fill="#0a0f1f" stroke="#ffffff" stroke-width="4"/>
+    <!-- prompt label under dial changes with the needle -->
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" text-anchor="middle">
+      <text y="48" fill="#3ad0a6" opacity="0">"What is 17 × 23?"  →  low
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="1;1;0;0;0;0;0;0;1" keyTimes="0;0.2;0.23;0.45;0.48;0.7;0.73;0.95;1"/></text>
+      <text y="48" fill="#4f8cff" opacity="0">"Prove the identity for all n"  →  high
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0;0;0;0" keyTimes="0;0.2;0.23;0.45;0.48;0.7;0.73;0.95;1"/></text>
+      <text y="48" fill="#7f9bff" opacity="0">"Fix this function"  →  medium
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;0;0;1;1;0;0;0" keyTimes="0;0.2;0.23;0.45;0.48;0.7;0.73;0.95;1"/></text>
+      <text y="48" fill="#a874ff" opacity="0">"AIME problem 14"  →  max
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;0;0;0;0;1;1;0" keyTimes="0;0.2;0.23;0.45;0.48;0.7;0.73;0.95;1"/></text>
+    </g>
+  </g>
+</svg>

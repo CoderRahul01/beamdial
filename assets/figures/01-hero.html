@@ -1,0 +1,80 @@
+<!doctype html><html><head><meta charset='utf-8'><style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { width:1600px; height:900px; background:#fcfcfb; font-family:Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; color:#0b0b0b;
+       -webkit-font-smoothing:antialiased; }
+.page { position:relative; width:1600px; height:900px; padding:72px 88px; }
+.eyebrow { font-size:20px; font-weight:600; color:#2a78d6; letter-spacing:0.02em; }
+h1 { font-size:58px; line-height:1.08; font-weight:700; letter-spacing:-0.025em; margin-top:18px; }
+.sub { font-size:23px; line-height:1.45; color:#52514e; margin-top:20px; }
+.foot { position:absolute; left:88px; right:88px; bottom:44px; display:flex; justify-content:space-between;
+         font-size:16px; color:#898781; border-top:1px solid #e1e0d9; padding-top:18px; }
+.foot b { color:#0b0b0b; font-weight:700; }
+svg text { font-family:Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; }
+</style></head><body><div class='page'><div style='position:absolute;left:88px;top:150px;width:560px'><div class='eyebrow'>BEAMDIAL · BENCHMARK RESULTS</div><h1 style='font-size:52px'>On standard math and code, Beam's low matches max.</h1><div class='sub'>410 graded math and code tasks, each run at all five reasoning levels. Every level lands within the same error bars. <b style='color:#0b0b0b'>low</b> gets there with 55% of the tokens and answers 1.7× faster. Frontier and long-context tasks are next (v0.2).</div><div style='display:flex;gap:48px;margin-top:44px'><div><div style='font-size:64px;font-weight:700;letter-spacing:-0.03em'>96.3%</div><div style='font-size:17px;color:#52514e;margin-top:4px'>accuracy at low<br>(max: 96.6%)</div></div><div><div style='font-size:64px;font-weight:700;letter-spacing:-0.03em;color:#2a78d6'>−45%</div><div style='font-size:17px;color:#52514e;margin-top:4px'>tokens vs max<br>(914 vs 1,657 per task)</div></div></div></div><svg style='position:absolute;left:740px;top:96px' width='780' height='680'><text x='70' y='40' font-size='19' font-weight='600' fill='#0b0b0b'>Accuracy (%)</text>
+<line x1='70' x2='750' y1='290.0' y2='290.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='58' y='295.0' font-size='14' fill='#898781' text-anchor='end'>0</text>
+<line x1='70' x2='750' y1='240.0' y2='240.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='58' y='245.0' font-size='14' fill='#898781' text-anchor='end'>25</text>
+<line x1='70' x2='750' y1='190.0' y2='190.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='58' y='195.0' font-size='14' fill='#898781' text-anchor='end'>50</text>
+<line x1='70' x2='750' y1='140.0' y2='140.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='58' y='145.0' font-size='14' fill='#898781' text-anchor='end'>75</text>
+<line x1='70' x2='750' y1='90.0' y2='90.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='58' y='95.0' font-size='14' fill='#898781' text-anchor='end'>100</text>
+<line x1='70' x2='750' y1='290' y2='290' stroke='#c3c2b7' stroke-width='1.5'/>
+<path d='M106.0,290 V101.3 Q106.0,97.3 110.0,97.3 H166.0 Q170.0,97.3 170.0,101.3 V290 Z' fill='#2a78d6'/>
+<line x1='138.0' x2='138.0' y1='101.9' y2='94.5' stroke='#52514e' stroke-width='1.5'/>
+<line x1='131.0' x2='145.0' y1='101.9' y2='101.9' stroke='#52514e' stroke-width='1.5'/>
+<line x1='131.0' x2='145.0' y1='94.5' y2='94.5' stroke='#52514e' stroke-width='1.5'/>
+<text x='138.0' y='82.5' font-size='18' font-weight='700' fill='#0b0b0b' text-anchor='middle'>96.3</text>
+<text x='138.0' y='320' font-size='16' fill='#0b0b0b' font-weight='600' text-anchor='middle'>low</text>
+<path d='M242.0,290 V101.8 Q242.0,97.8 246.0,97.8 H302.0 Q306.0,97.8 306.0,101.8 V290 Z' fill='#c9c8c1'/>
+<line x1='274.0' x2='274.0' y1='102.5' y2='94.8' stroke='#52514e' stroke-width='1.5'/>
+<line x1='267.0' x2='281.0' y1='102.5' y2='102.5' stroke='#52514e' stroke-width='1.5'/>
+<line x1='267.0' x2='281.0' y1='94.8' y2='94.8' stroke='#52514e' stroke-width='1.5'/>
+<text x='274.0' y='82.8' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>96.1</text>
+<text x='274.0' y='320' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>medium</text>
+<path d='M378.0,290 V99.4 Q378.0,95.4 382.0,95.4 H438.0 Q442.0,95.4 442.0,99.4 V290 Z' fill='#c9c8c1'/>
+<line x1='410.0' x2='410.0' y1='99.5' y2='93.0' stroke='#52514e' stroke-width='1.5'/>
+<line x1='403.0' x2='417.0' y1='99.5' y2='99.5' stroke='#52514e' stroke-width='1.5'/>
+<line x1='403.0' x2='417.0' y1='93.0' y2='93.0' stroke='#52514e' stroke-width='1.5'/>
+<text x='410.0' y='81.0' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>97.3</text>
+<text x='410.0' y='320' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>high</text>
+<path d='M514.0,290 V99.4 Q514.0,95.4 518.0,95.4 H574.0 Q578.0,95.4 578.0,99.4 V290 Z' fill='#c9c8c1'/>
+<line x1='546.0' x2='546.0' y1='99.5' y2='93.0' stroke='#52514e' stroke-width='1.5'/>
+<line x1='539.0' x2='553.0' y1='99.5' y2='99.5' stroke='#52514e' stroke-width='1.5'/>
+<line x1='539.0' x2='553.0' y1='93.0' y2='93.0' stroke='#52514e' stroke-width='1.5'/>
+<text x='546.0' y='81.0' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>97.3</text>
+<text x='546.0' y='320' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>xhigh</text>
+<path d='M650.0,290 V100.8 Q650.0,96.8 654.0,96.8 H710.0 Q714.0,96.8 714.0,100.8 V290 Z' fill='#c9c8c1'/>
+<line x1='682.0' x2='682.0' y1='101.3' y2='94.1' stroke='#52514e' stroke-width='1.5'/>
+<line x1='675.0' x2='689.0' y1='101.3' y2='101.3' stroke='#52514e' stroke-width='1.5'/>
+<line x1='675.0' x2='689.0' y1='94.1' y2='94.1' stroke='#52514e' stroke-width='1.5'/>
+<text x='682.0' y='82.1' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>96.6</text>
+<text x='682.0' y='320' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>max</text><text x='70' y='390' font-size='19' font-weight='600' fill='#0b0b0b'>Completion tokens per task</text>
+<line x1='70' x2='750' y1='640.0' y2='640.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='58' y='645.0' font-size='14' fill='#898781' text-anchor='end'>0</text>
+<line x1='70' x2='750' y1='590.0' y2='590.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='58' y='595.0' font-size='14' fill='#898781' text-anchor='end'>500</text>
+<line x1='70' x2='750' y1='540.0' y2='540.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='58' y='545.0' font-size='14' fill='#898781' text-anchor='end'>1,000</text>
+<line x1='70' x2='750' y1='490.0' y2='490.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='58' y='495.0' font-size='14' fill='#898781' text-anchor='end'>1,500</text>
+<line x1='70' x2='750' y1='440.0' y2='440.0' stroke='#e1e0d9' stroke-width='1'/>
+<text x='58' y='445.0' font-size='14' fill='#898781' text-anchor='end'>2,000</text>
+<line x1='70' x2='750' y1='640' y2='640' stroke='#c3c2b7' stroke-width='1.5'/>
+<path d='M106.0,640 V552.6 Q106.0,548.6 110.0,548.6 H166.0 Q170.0,548.6 170.0,552.6 V640 Z' fill='#2a78d6'/>
+<text x='138.0' y='536.6' font-size='18' font-weight='700' fill='#0b0b0b' text-anchor='middle'>914</text>
+<text x='138.0' y='670' font-size='16' fill='#0b0b0b' font-weight='600' text-anchor='middle'>low</text>
+<path d='M242.0,640 V520.4 Q242.0,516.4 246.0,516.4 H302.0 Q306.0,516.4 306.0,520.4 V640 Z' fill='#c9c8c1'/>
+<text x='274.0' y='504.4' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>1,236</text>
+<text x='274.0' y='670' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>medium</text>
+<path d='M378.0,640 V496.9 Q378.0,492.9 382.0,492.9 H438.0 Q442.0,492.9 442.0,496.9 V640 Z' fill='#c9c8c1'/>
+<text x='410.0' y='480.9' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>1,471</text>
+<text x='410.0' y='670' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>high</text>
+<path d='M514.0,640 V483.7 Q514.0,479.7 518.0,479.7 H574.0 Q578.0,479.7 578.0,483.7 V640 Z' fill='#c9c8c1'/>
+<text x='546.0' y='467.7' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>1,603</text>
+<text x='546.0' y='670' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>xhigh</text>
+<path d='M650.0,640 V478.3 Q650.0,474.3 654.0,474.3 H710.0 Q714.0,474.3 714.0,478.3 V640 Z' fill='#c9c8c1'/>
+<text x='682.0' y='462.3' font-size='18' font-weight='500' fill='#0b0b0b' text-anchor='middle'>1,657</text>
+<text x='682.0' y='670' font-size='16' fill='#52514e' font-weight='400' text-anchor='middle'>max</text></svg><div class='foot'><span><b>BeamDial</b> &nbsp;·&nbsp; 410 tasks × 5 levels = 2,050 graded runs on Beam 1.0 (501B A23B) via Hugging Face, Baseten</span><span>Error bars: 95% Wilson interval</span></div></div></body></html>

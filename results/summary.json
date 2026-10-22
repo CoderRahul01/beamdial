@@ -1,0 +1,1907 @@
+{
+ "n_tasks": 410,
+ "prices": {
+  "input": 0.4,
+  "output": 1.2
+ },
+ "policies": [
+  {
+   "policy": "fixed: low",
+   "kind": "fixed",
+   "accuracy": 0.9634146341463414,
+   "tokens_per_task": 913.5390243902439,
+   "usd_per_1k": 1.1551365853658537,
+   "latency_s": 1.8611463414634146,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 410,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   },
+   "accuracy_vs_max": -0.0024390243902439046,
+   "token_share_vs_max": 0.5511701758206828
+  },
+  {
+   "policy": "fixed: medium",
+   "kind": "fixed",
+   "accuracy": 0.9609756097560975,
+   "tokens_per_task": 1236.2975609756097,
+   "usd_per_1k": 1.5424468292682925,
+   "latency_s": 2.483756097560976,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 0,
+    "medium": 410,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   },
+   "accuracy_vs_max": -0.004878048780487809,
+   "token_share_vs_max": 0.7459017358392832
+  },
+  {
+   "policy": "fixed: high",
+   "kind": "fixed",
+   "accuracy": 0.973170731707317,
+   "tokens_per_task": 1470.8902439024391,
+   "usd_per_1k": 1.8243580487804878,
+   "latency_s": 2.8477560975609757,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 0,
+    "medium": 0,
+    "high": 410,
+    "xhigh": 0,
+    "max": 0
+   },
+   "accuracy_vs_max": 0.007317073170731714,
+   "token_share_vs_max": 0.8874397400655722
+  },
+  {
+   "policy": "fixed: xhigh",
+   "kind": "fixed",
+   "accuracy": 0.973170731707317,
+   "tokens_per_task": 1602.8146341463414,
+   "usd_per_1k": 1.9826673170731708,
+   "latency_s": 3.142536585365854,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 0,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 410,
+    "max": 0
+   },
+   "accuracy_vs_max": 0.007317073170731714,
+   "token_share_vs_max": 0.9670343577276928
+  },
+  {
+   "policy": "fixed: max",
+   "kind": "fixed",
+   "accuracy": 0.9658536585365853,
+   "tokens_per_task": 1657.4536585365854,
+   "usd_per_1k": 2.0482341463414633,
+   "latency_s": 3.2543414634146344,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 0,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 410
+   },
+   "accuracy_vs_max": 0.0,
+   "token_share_vs_max": 1.0
+  },
+  {
+   "policy": "oracle (upper bound)",
+   "kind": "oracle",
+   "accuracy": 0.9804878048780488,
+   "tokens_per_task": 816.3951219512195,
+   "usd_per_1k": 1.038780487804878,
+   "latency_s": 1.7445609756097562,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 132,
+    "medium": 56,
+    "high": 57,
+    "xhigh": 77,
+    "max": 88
+   },
+   "accuracy_vs_max": 0.014634146341463428,
+   "token_share_vs_max": 0.4925598479006881
+  },
+  {
+   "policy": "cascade from low (check-based)",
+   "kind": "cascade",
+   "accuracy": 0.9682926829268292,
+   "tokens_per_task": 965.1121951219512,
+   "usd_per_1k": 1.2196546341463415,
+   "latency_s": 1.9609024390243903,
+   "calls_per_task": 1.0341463414634147,
+   "level_mix": {
+    "low": 405,
+    "medium": 2,
+    "high": 0,
+    "xhigh": 0,
+    "max": 3
+   },
+   "accuracy_vs_max": 0.0024390243902439046,
+   "token_share_vs_max": 0.5822860809116541
+  },
+  {
+   "policy": "cascade from medium (check-based)",
+   "kind": "cascade",
+   "accuracy": 0.9609756097560975,
+   "tokens_per_task": 1279.5341463414634,
+   "usd_per_1k": 1.5961541463414632,
+   "latency_s": 2.5661951219512193,
+   "calls_per_task": 1.0219512195121951,
+   "level_mix": {
+    "low": 0,
+    "medium": 407,
+    "high": 0,
+    "xhigh": 0,
+    "max": 3
+   },
+   "accuracy_vs_max": -0.004878048780487809,
+   "token_share_vs_max": 0.7719878862080535
+  },
+  {
+   "policy": "agreement cascade",
+   "kind": "cascade",
+   "accuracy": 0.975609756097561,
+   "tokens_per_task": 2276.4536585365854,
+   "usd_per_1k": 2.8383004878048776,
+   "latency_s": 4.530682926829268,
+   "calls_per_task": 1.824390243902439,
+   "level_mix": {
+    "low": 95,
+    "medium": 302,
+    "high": 6,
+    "xhigh": 4,
+    "max": 3
+   },
+   "accuracy_vs_max": 0.009756097560975618,
+   "token_share_vs_max": 1.3734644385451678
+  },
+  {
+   "policy": "low, high if low thinks >2000 tok",
+   "kind": "length",
+   "accuracy": 0.975609756097561,
+   "tokens_per_task": 1730.6926829268293,
+   "usd_per_1k": 2.14440487804878,
+   "latency_s": 3.3225365853658535,
+   "calls_per_task": 1.1170731707317074,
+   "level_mix": {
+    "low": 362,
+    "medium": 0,
+    "high": 48,
+    "xhigh": 0,
+    "max": 0
+   },
+   "accuracy_vs_max": 0.009756097560975618,
+   "token_share_vs_max": 1.0441876754822266
+  },
+  {
+   "policy": "low, high if low thinks >3000 tok",
+   "kind": "length",
+   "accuracy": 0.973170731707317,
+   "tokens_per_task": 1454.709756097561,
+   "usd_per_1k": 1.8088595121951219,
+   "latency_s": 2.821707317073171,
+   "calls_per_task": 1.0560975609756098,
+   "level_mix": {
+    "low": 387,
+    "medium": 0,
+    "high": 23,
+    "xhigh": 0,
+    "max": 0
+   },
+   "accuracy_vs_max": 0.007317073170731714,
+   "token_share_vs_max": 0.8776774835333659
+  },
+  {
+   "policy": "low, high if low thinks >4000 tok",
+   "kind": "length",
+   "accuracy": 0.9707317073170731,
+   "tokens_per_task": 1258.8292682926829,
+   "usd_per_1k": 1.5722409756097562,
+   "latency_s": 2.473609756097561,
+   "calls_per_task": 1.0341463414634147,
+   "level_mix": {
+    "low": 396,
+    "medium": 0,
+    "high": 14,
+    "xhigh": 0,
+    "max": 0
+   },
+   "accuracy_vs_max": 0.004878048780487809,
+   "token_share_vs_max": 0.7594959061504865
+  },
+  {
+   "policy": "router cv5 @ 0.5",
+   "kind": "router",
+   "accuracy": 0.9634146341463414,
+   "tokens_per_task": 913.5390243902439,
+   "usd_per_1k": 1.1551365853658537,
+   "latency_s": 1.8611463414634146,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 410,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   },
+   "target": 0.5,
+   "accuracy_vs_max": -0.0024390243902439046,
+   "token_share_vs_max": 0.5511701758206828
+  },
+  {
+   "policy": "router cv5 @ 0.6",
+   "kind": "router",
+   "accuracy": 0.9634146341463414,
+   "tokens_per_task": 913.5390243902439,
+   "usd_per_1k": 1.1551365853658537,
+   "latency_s": 1.8611463414634146,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 410,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   },
+   "target": 0.6,
+   "accuracy_vs_max": -0.0024390243902439046,
+   "token_share_vs_max": 0.5511701758206828
+  },
+  {
+   "policy": "router cv5 @ 0.7",
+   "kind": "router",
+   "accuracy": 0.9634146341463414,
+   "tokens_per_task": 913.5390243902439,
+   "usd_per_1k": 1.1551365853658537,
+   "latency_s": 1.8611463414634146,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 410,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   },
+   "target": 0.7,
+   "accuracy_vs_max": -0.0024390243902439046,
+   "token_share_vs_max": 0.5511701758206828
+  },
+  {
+   "policy": "router cv5 @ 0.75",
+   "kind": "router",
+   "accuracy": 0.9634146341463414,
+   "tokens_per_task": 913.5390243902439,
+   "usd_per_1k": 1.1551365853658537,
+   "latency_s": 1.8611463414634146,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 410,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   },
+   "target": 0.75,
+   "accuracy_vs_max": -0.0024390243902439046,
+   "token_share_vs_max": 0.5511701758206828
+  },
+  {
+   "policy": "router cv5 @ 0.8",
+   "kind": "router",
+   "accuracy": 0.9634146341463414,
+   "tokens_per_task": 913.5390243902439,
+   "usd_per_1k": 1.1551365853658537,
+   "latency_s": 1.8611463414634146,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 410,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   },
+   "target": 0.8,
+   "accuracy_vs_max": -0.0024390243902439046,
+   "token_share_vs_max": 0.5511701758206828
+  },
+  {
+   "policy": "router cv5 @ 0.85",
+   "kind": "router",
+   "accuracy": 0.9658536585365853,
+   "tokens_per_task": 919.0292682926829,
+   "usd_per_1k": 1.1617258536585366,
+   "latency_s": 1.8708292682926828,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 403,
+    "medium": 6,
+    "high": 1,
+    "xhigh": 0,
+    "max": 0
+   },
+   "target": 0.85,
+   "accuracy_vs_max": 0.0,
+   "token_share_vs_max": 0.5544826327778726
+  },
+  {
+   "policy": "router cv5 @ 0.9",
+   "kind": "router",
+   "accuracy": 0.9658536585365853,
+   "tokens_per_task": 963.8658536585366,
+   "usd_per_1k": 1.2155541463414634,
+   "latency_s": 1.9643658536585367,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 375,
+    "medium": 9,
+    "high": 22,
+    "xhigh": 2,
+    "max": 2
+   },
+   "target": 0.9,
+   "accuracy_vs_max": 0.0,
+   "token_share_vs_max": 0.5815341193367434
+  },
+  {
+   "policy": "router cv5 @ 0.93",
+   "kind": "router",
+   "accuracy": 0.9658536585365853,
+   "tokens_per_task": 953.0780487804878,
+   "usd_per_1k": 1.2026243902439024,
+   "latency_s": 1.940609756097561,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 354,
+    "medium": 14,
+    "high": 25,
+    "xhigh": 10,
+    "max": 7
+   },
+   "target": 0.93,
+   "accuracy_vs_max": 0.0,
+   "token_share_vs_max": 0.5750254577989158
+  },
+  {
+   "policy": "router cv5 @ 0.95",
+   "kind": "router",
+   "accuracy": 0.9682926829268292,
+   "tokens_per_task": 954.8731707317073,
+   "usd_per_1k": 1.2047921951219513,
+   "latency_s": 1.988609756097561,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 338,
+    "medium": 16,
+    "high": 32,
+    "xhigh": 17,
+    "max": 7
+   },
+   "target": 0.95,
+   "accuracy_vs_max": 0.0024390243902439046,
+   "token_share_vs_max": 0.5761085179146384
+  },
+  {
+   "policy": "router cv5 @ 0.97",
+   "kind": "router",
+   "accuracy": 0.9707317073170731,
+   "tokens_per_task": 1240.7731707317073,
+   "usd_per_1k": 1.5480673170731707,
+   "latency_s": 2.5124146341463414,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 123,
+    "medium": 31,
+    "high": 185,
+    "xhigh": 59,
+    "max": 12
+   },
+   "target": 0.97,
+   "accuracy_vs_max": 0.004878048780487809,
+   "token_share_vs_max": 0.7486020283832384
+  },
+  {
+   "policy": "router cv5 + check @ 0.5",
+   "kind": "router",
+   "accuracy": 0.9682926829268292,
+   "tokens_per_task": 965.1121951219512,
+   "usd_per_1k": 1.2196546341463415,
+   "latency_s": 1.9609024390243903,
+   "calls_per_task": 1.0341463414634147,
+   "level_mix": {
+    "low": 405,
+    "medium": 2,
+    "high": 0,
+    "xhigh": 0,
+    "max": 3
+   },
+   "target": 0.5,
+   "accuracy_vs_max": 0.0024390243902439046,
+   "token_share_vs_max": 0.5822860809116541
+  },
+  {
+   "policy": "router cv5 + check @ 0.6",
+   "kind": "router",
+   "accuracy": 0.9682926829268292,
+   "tokens_per_task": 965.1121951219512,
+   "usd_per_1k": 1.2196546341463415,
+   "latency_s": 1.9609024390243903,
+   "calls_per_task": 1.0341463414634147,
+   "level_mix": {
+    "low": 405,
+    "medium": 2,
+    "high": 0,
+    "xhigh": 0,
+    "max": 3
+   },
+   "target": 0.6,
+   "accuracy_vs_max": 0.0024390243902439046,
+   "token_share_vs_max": 0.5822860809116541
+  },
+  {
+   "policy": "router cv5 + check @ 0.7",
+   "kind": "router",
+   "accuracy": 0.9682926829268292,
+   "tokens_per_task": 965.1121951219512,
+   "usd_per_1k": 1.2196546341463415,
+   "latency_s": 1.9609024390243903,
+   "calls_per_task": 1.0341463414634147,
+   "level_mix": {
+    "low": 405,
+    "medium": 2,
+    "high": 0,
+    "xhigh": 0,
+    "max": 3
+   },
+   "target": 0.7,
+   "accuracy_vs_max": 0.0024390243902439046,
+   "token_share_vs_max": 0.5822860809116541
+  },
+  {
+   "policy": "router cv5 + check @ 0.75",
+   "kind": "router",
+   "accuracy": 0.9682926829268292,
+   "tokens_per_task": 965.1121951219512,
+   "usd_per_1k": 1.2196546341463415,
+   "latency_s": 1.9609024390243903,
+   "calls_per_task": 1.0341463414634147,
+   "level_mix": {
+    "low": 405,
+    "medium": 2,
+    "high": 0,
+    "xhigh": 0,
+    "max": 3
+   },
+   "target": 0.75,
+   "accuracy_vs_max": 0.0024390243902439046,
+   "token_share_vs_max": 0.5822860809116541
+  },
+  {
+   "policy": "router cv5 + check @ 0.8",
+   "kind": "router",
+   "accuracy": 0.9682926829268292,
+   "tokens_per_task": 965.1121951219512,
+   "usd_per_1k": 1.2196546341463415,
+   "latency_s": 1.9609024390243903,
+   "calls_per_task": 1.0341463414634147,
+   "level_mix": {
+    "low": 405,
+    "medium": 2,
+    "high": 0,
+    "xhigh": 0,
+    "max": 3
+   },
+   "target": 0.8,
+   "accuracy_vs_max": 0.0024390243902439046,
+   "token_share_vs_max": 0.5822860809116541
+  },
+  {
+   "policy": "router cv5 + check @ 0.85",
+   "kind": "router",
+   "accuracy": 0.9682926829268292,
+   "tokens_per_task": 969.3219512195122,
+   "usd_per_1k": 1.2246117073170733,
+   "latency_s": 1.968,
+   "calls_per_task": 1.0317073170731708,
+   "level_mix": {
+    "low": 399,
+    "medium": 7,
+    "high": 1,
+    "xhigh": 0,
+    "max": 3
+   },
+   "target": 0.85,
+   "accuracy_vs_max": 0.0024390243902439046,
+   "token_share_vs_max": 0.5848259746069493
+  },
+  {
+   "policy": "router cv5 + check @ 0.9",
+   "kind": "router",
+   "accuracy": 0.9658536585365853,
+   "tokens_per_task": 1012.3048780487804,
+   "usd_per_1k": 1.276109268292683,
+   "latency_s": 2.057292682926829,
+   "calls_per_task": 1.0292682926829269,
+   "level_mix": {
+    "low": 372,
+    "medium": 9,
+    "high": 22,
+    "xhigh": 2,
+    "max": 5
+   },
+   "target": 0.9,
+   "accuracy_vs_max": 0.0,
+   "token_share_vs_max": 0.6107590838724107
+  },
+  {
+   "policy": "router cv5 + check @ 0.93",
+   "kind": "router",
+   "accuracy": 0.9658536585365853,
+   "tokens_per_task": 1001.5170731707317,
+   "usd_per_1k": 1.263179512195122,
+   "latency_s": 2.033536585365854,
+   "calls_per_task": 1.0292682926829269,
+   "level_mix": {
+    "low": 351,
+    "medium": 14,
+    "high": 25,
+    "xhigh": 10,
+    "max": 10
+   },
+   "target": 0.93,
+   "accuracy_vs_max": 0.0,
+   "token_share_vs_max": 0.6042504223345831
+  },
+  {
+   "policy": "router cv5 + check @ 0.95",
+   "kind": "router",
+   "accuracy": 0.9682926829268292,
+   "tokens_per_task": 1003.3121951219512,
+   "usd_per_1k": 1.2653473170731706,
+   "latency_s": 2.081536585365854,
+   "calls_per_task": 1.0292682926829269,
+   "level_mix": {
+    "low": 335,
+    "medium": 16,
+    "high": 32,
+    "xhigh": 17,
+    "max": 10
+   },
+   "target": 0.95,
+   "accuracy_vs_max": 0.0024390243902439046,
+   "token_share_vs_max": 0.6053334824503057
+  },
+  {
+   "policy": "router cv5 + check @ 0.97",
+   "kind": "router",
+   "accuracy": 0.9707317073170731,
+   "tokens_per_task": 1284.0219512195122,
+   "usd_per_1k": 1.601561951219512,
+   "latency_s": 2.5930731707317074,
+   "calls_per_task": 1.0170731707317073,
+   "level_mix": {
+    "low": 122,
+    "medium": 30,
+    "high": 185,
+    "xhigh": 59,
+    "max": 14
+   },
+   "target": 0.97,
+   "accuracy_vs_max": 0.004878048780487809,
+   "token_share_vs_max": 0.77469553649736
+  },
+  {
+   "policy": "router loso @ 0.5",
+   "kind": "router",
+   "accuracy": 0.9634146341463414,
+   "tokens_per_task": 913.5390243902439,
+   "usd_per_1k": 1.1551365853658537,
+   "latency_s": 1.8611463414634146,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 410,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   },
+   "target": 0.5,
+   "accuracy_vs_max": -0.0024390243902439046,
+   "token_share_vs_max": 0.5511701758206828
+  },
+  {
+   "policy": "router loso @ 0.6",
+   "kind": "router",
+   "accuracy": 0.9634146341463414,
+   "tokens_per_task": 913.5390243902439,
+   "usd_per_1k": 1.1551365853658537,
+   "latency_s": 1.8611463414634146,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 410,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   },
+   "target": 0.6,
+   "accuracy_vs_max": -0.0024390243902439046,
+   "token_share_vs_max": 0.5511701758206828
+  },
+  {
+   "policy": "router loso @ 0.7",
+   "kind": "router",
+   "accuracy": 0.9634146341463414,
+   "tokens_per_task": 913.5390243902439,
+   "usd_per_1k": 1.1551365853658537,
+   "latency_s": 1.8611463414634146,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 410,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   },
+   "target": 0.7,
+   "accuracy_vs_max": -0.0024390243902439046,
+   "token_share_vs_max": 0.5511701758206828
+  },
+  {
+   "policy": "router loso @ 0.75",
+   "kind": "router",
+   "accuracy": 0.9634146341463414,
+   "tokens_per_task": 913.5390243902439,
+   "usd_per_1k": 1.1551365853658537,
+   "latency_s": 1.8611463414634146,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 410,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   },
+   "target": 0.75,
+   "accuracy_vs_max": -0.0024390243902439046,
+   "token_share_vs_max": 0.5511701758206828
+  },
+  {
+   "policy": "router loso @ 0.8",
+   "kind": "router",
+   "accuracy": 0.9634146341463414,
+   "tokens_per_task": 913.5390243902439,
+   "usd_per_1k": 1.1551365853658537,
+   "latency_s": 1.8611463414634146,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 410,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   },
+   "target": 0.8,
+   "accuracy_vs_max": -0.0024390243902439046,
+   "token_share_vs_max": 0.5511701758206828
+  },
+  {
+   "policy": "router loso @ 0.85",
+   "kind": "router",
+   "accuracy": 0.9634146341463414,
+   "tokens_per_task": 913.709756097561,
+   "usd_per_1k": 1.15534243902439,
+   "latency_s": 1.8617560975609757,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 407,
+    "medium": 2,
+    "high": 1,
+    "xhigh": 0,
+    "max": 0
+   },
+   "target": 0.85,
+   "accuracy_vs_max": -0.0024390243902439046,
+   "token_share_vs_max": 0.5512731842556022
+  },
+  {
+   "policy": "router loso @ 0.9",
+   "kind": "router",
+   "accuracy": 0.9609756097560975,
+   "tokens_per_task": 919.9463414634147,
+   "usd_per_1k": 1.1628448780487806,
+   "latency_s": 1.8769024390243902,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 362,
+    "medium": 28,
+    "high": 20,
+    "xhigh": 0,
+    "max": 0
+   },
+   "target": 0.9,
+   "accuracy_vs_max": -0.004878048780487809,
+   "token_share_vs_max": 0.5550359352282961
+  },
+  {
+   "policy": "router loso @ 0.93",
+   "kind": "router",
+   "accuracy": 0.9560975609756097,
+   "tokens_per_task": 939.7243902439025,
+   "usd_per_1k": 1.1866429268292682,
+   "latency_s": 1.9023170731707317,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 300,
+    "medium": 24,
+    "high": 86,
+    "xhigh": 0,
+    "max": 0
+   },
+   "target": 0.93,
+   "accuracy_vs_max": -0.009756097560975618,
+   "token_share_vs_max": 0.5669687266391585
+  },
+  {
+   "policy": "router loso @ 0.95",
+   "kind": "router",
+   "accuracy": 0.9560975609756097,
+   "tokens_per_task": 994.5073170731707,
+   "usd_per_1k": 1.2524517073170731,
+   "latency_s": 1.9894634146341463,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 233,
+    "medium": 20,
+    "high": 155,
+    "xhigh": 2,
+    "max": 0
+   },
+   "target": 0.95,
+   "accuracy_vs_max": -0.009756097560975618,
+   "token_share_vs_max": 0.6000211903066119
+  },
+  {
+   "policy": "router loso @ 0.97",
+   "kind": "router",
+   "accuracy": 0.9585365853658536,
+   "tokens_per_task": 1021.9317073170731,
+   "usd_per_1k": 1.2854331707317073,
+   "latency_s": 2.031731707317073,
+   "calls_per_task": 1,
+   "level_mix": {
+    "low": 163,
+    "medium": 16,
+    "high": 221,
+    "xhigh": 10,
+    "max": 0
+   },
+   "target": 0.97,
+   "accuracy_vs_max": -0.007317073170731714,
+   "token_share_vs_max": 0.6165672880527874
+  },
+  {
+   "policy": "router loso + check @ 0.5",
+   "kind": "router",
+   "accuracy": 0.9682926829268292,
+   "tokens_per_task": 965.1121951219512,
+   "usd_per_1k": 1.2196546341463415,
+   "latency_s": 1.9609024390243903,
+   "calls_per_task": 1.0341463414634147,
+   "level_mix": {
+    "low": 405,
+    "medium": 2,
+    "high": 0,
+    "xhigh": 0,
+    "max": 3
+   },
+   "target": 0.5,
+   "accuracy_vs_max": 0.0024390243902439046,
+   "token_share_vs_max": 0.5822860809116541
+  },
+  {
+   "policy": "router loso + check @ 0.6",
+   "kind": "router",
+   "accuracy": 0.9682926829268292,
+   "tokens_per_task": 965.1121951219512,
+   "usd_per_1k": 1.2196546341463415,
+   "latency_s": 1.9609024390243903,
+   "calls_per_task": 1.0341463414634147,
+   "level_mix": {
+    "low": 405,
+    "medium": 2,
+    "high": 0,
+    "xhigh": 0,
+    "max": 3
+   },
+   "target": 0.6,
+   "accuracy_vs_max": 0.0024390243902439046,
+   "token_share_vs_max": 0.5822860809116541
+  },
+  {
+   "policy": "router loso + check @ 0.7",
+   "kind": "router",
+   "accuracy": 0.9682926829268292,
+   "tokens_per_task": 965.1121951219512,
+   "usd_per_1k": 1.2196546341463415,
+   "latency_s": 1.9609024390243903,
+   "calls_per_task": 1.0341463414634147,
+   "level_mix": {
+    "low": 405,
+    "medium": 2,
+    "high": 0,
+    "xhigh": 0,
+    "max": 3
+   },
+   "target": 0.7,
+   "accuracy_vs_max": 0.0024390243902439046,
+   "token_share_vs_max": 0.5822860809116541
+  },
+  {
+   "policy": "router loso + check @ 0.75",
+   "kind": "router",
+   "accuracy": 0.9682926829268292,
+   "tokens_per_task": 965.1121951219512,
+   "usd_per_1k": 1.2196546341463415,
+   "latency_s": 1.9609024390243903,
+   "calls_per_task": 1.0341463414634147,
+   "level_mix": {
+    "low": 405,
+    "medium": 2,
+    "high": 0,
+    "xhigh": 0,
+    "max": 3
+   },
+   "target": 0.75,
+   "accuracy_vs_max": 0.0024390243902439046,
+   "token_share_vs_max": 0.5822860809116541
+  },
+  {
+   "policy": "router loso + check @ 0.8",
+   "kind": "router",
+   "accuracy": 0.9682926829268292,
+   "tokens_per_task": 965.1121951219512,
+   "usd_per_1k": 1.2196546341463415,
+   "latency_s": 1.9609024390243903,
+   "calls_per_task": 1.0341463414634147,
+   "level_mix": {
+    "low": 405,
+    "medium": 2,
+    "high": 0,
+    "xhigh": 0,
+    "max": 3
+   },
+   "target": 0.8,
+   "accuracy_vs_max": 0.0024390243902439046,
+   "token_share_vs_max": 0.5822860809116541
+  },
+  {
+   "policy": "router loso + check @ 0.85",
+   "kind": "router",
+   "accuracy": 0.9682926829268292,
+   "tokens_per_task": 965.2829268292683,
+   "usd_per_1k": 1.219860487804878,
+   "latency_s": 1.9615121951219512,
+   "calls_per_task": 1.0341463414634147,
+   "level_mix": {
+    "low": 402,
+    "medium": 4,
+    "high": 1,
+    "xhigh": 0,
+    "max": 3
+   },
+   "target": 0.85,
+   "accuracy_vs_max": 0.0024390243902439046,
+   "token_share_vs_max": 0.5823890893465733
+  },
+  {
+   "policy": "router loso + check @ 0.9",
+   "kind": "router",
+   "accuracy": 0.9658536585365853,
+   "tokens_per_task": 967.2926829268292,
+   "usd_per_1k": 1.2217785365853657,
+   "latency_s": 1.9674634146341463,
+   "calls_per_task": 1.026829268292683,
+   "level_mix": {
+    "low": 359,
+    "medium": 29,
+    "high": 19,
+    "xhigh": 0,
+    "max": 3
+   },
+   "target": 0.9,
+   "accuracy_vs_max": 0.0,
+   "token_share_vs_max": 0.5836016457804801
+  },
+  {
+   "policy": "router loso + check @ 0.93",
+   "kind": "router",
+   "accuracy": 0.9609756097560975,
+   "tokens_per_task": 983.5317073170731,
+   "usd_per_1k": 1.2408234146341464,
+   "latency_s": 1.9861463414634146,
+   "calls_per_task": 1.0219512195121951,
+   "level_mix": {
+    "low": 298,
+    "medium": 25,
+    "high": 84,
+    "xhigh": 0,
+    "max": 3
+   },
+   "target": 0.93,
+   "accuracy_vs_max": -0.004878048780487809,
+   "token_share_vs_max": 0.5933992194903731
+  },
+  {
+   "policy": "router loso + check @ 0.95",
+   "kind": "router",
+   "accuracy": 0.9609756097560975,
+   "tokens_per_task": 1038.3146341463414,
+   "usd_per_1k": 1.3066321951219513,
+   "latency_s": 2.0732926829268292,
+   "calls_per_task": 1.0219512195121951,
+   "level_mix": {
+    "low": 231,
+    "medium": 21,
+    "high": 153,
+    "xhigh": 2,
+    "max": 3
+   },
+   "target": 0.95,
+   "accuracy_vs_max": -0.004878048780487809,
+   "token_share_vs_max": 0.6264516831578265
+  },
+  {
+   "policy": "router loso + check @ 0.97",
+   "kind": "router",
+   "accuracy": 0.9609756097560975,
+   "tokens_per_task": 1052.6975609756098,
+   "usd_per_1k": 1.3236741463414634,
+   "latency_s": 2.090170731707317,
+   "calls_per_task": 1.0170731707317073,
+   "level_mix": {
+    "low": 162,
+    "medium": 17,
+    "high": 218,
+    "xhigh": 10,
+    "max": 3
+   },
+   "target": 0.97,
+   "accuracy_vs_max": -0.004878048780487809,
+   "token_share_vs_max": 0.63512940802524
+  }
+ ],
+ "router_curves": {
+  "router cv5": [
+   {
+    "policy": "router cv5 @ 0.5",
+    "kind": "router",
+    "accuracy": 0.9634146341463414,
+    "tokens_per_task": 913.5390243902439,
+    "usd_per_1k": 1.1551365853658537,
+    "latency_s": 1.8611463414634146,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 410,
+     "medium": 0,
+     "high": 0,
+     "xhigh": 0,
+     "max": 0
+    },
+    "target": 0.5,
+    "accuracy_vs_max": -0.0024390243902439046,
+    "token_share_vs_max": 0.5511701758206828
+   },
+   {
+    "policy": "router cv5 @ 0.6",
+    "kind": "router",
+    "accuracy": 0.9634146341463414,
+    "tokens_per_task": 913.5390243902439,
+    "usd_per_1k": 1.1551365853658537,
+    "latency_s": 1.8611463414634146,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 410,
+     "medium": 0,
+     "high": 0,
+     "xhigh": 0,
+     "max": 0
+    },
+    "target": 0.6,
+    "accuracy_vs_max": -0.0024390243902439046,
+    "token_share_vs_max": 0.5511701758206828
+   },
+   {
+    "policy": "router cv5 @ 0.7",
+    "kind": "router",
+    "accuracy": 0.9634146341463414,
+    "tokens_per_task": 913.5390243902439,
+    "usd_per_1k": 1.1551365853658537,
+    "latency_s": 1.8611463414634146,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 410,
+     "medium": 0,
+     "high": 0,
+     "xhigh": 0,
+     "max": 0
+    },
+    "target": 0.7,
+    "accuracy_vs_max": -0.0024390243902439046,
+    "token_share_vs_max": 0.5511701758206828
+   },
+   {
+    "policy": "router cv5 @ 0.75",
+    "kind": "router",
+    "accuracy": 0.9634146341463414,
+    "tokens_per_task": 913.5390243902439,
+    "usd_per_1k": 1.1551365853658537,
+    "latency_s": 1.8611463414634146,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 410,
+     "medium": 0,
+     "high": 0,
+     "xhigh": 0,
+     "max": 0
+    },
+    "target": 0.75,
+    "accuracy_vs_max": -0.0024390243902439046,
+    "token_share_vs_max": 0.5511701758206828
+   },
+   {
+    "policy": "router cv5 @ 0.8",
+    "kind": "router",
+    "accuracy": 0.9634146341463414,
+    "tokens_per_task": 913.5390243902439,
+    "usd_per_1k": 1.1551365853658537,
+    "latency_s": 1.8611463414634146,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 410,
+     "medium": 0,
+     "high": 0,
+     "xhigh": 0,
+     "max": 0
+    },
+    "target": 0.8,
+    "accuracy_vs_max": -0.0024390243902439046,
+    "token_share_vs_max": 0.5511701758206828
+   },
+   {
+    "policy": "router cv5 @ 0.85",
+    "kind": "router",
+    "accuracy": 0.9658536585365853,
+    "tokens_per_task": 919.0292682926829,
+    "usd_per_1k": 1.1617258536585366,
+    "latency_s": 1.8708292682926828,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 403,
+     "medium": 6,
+     "high": 1,
+     "xhigh": 0,
+     "max": 0
+    },
+    "target": 0.85,
+    "accuracy_vs_max": 0.0,
+    "token_share_vs_max": 0.5544826327778726
+   },
+   {
+    "policy": "router cv5 @ 0.9",
+    "kind": "router",
+    "accuracy": 0.9658536585365853,
+    "tokens_per_task": 963.8658536585366,
+    "usd_per_1k": 1.2155541463414634,
+    "latency_s": 1.9643658536585367,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 375,
+     "medium": 9,
+     "high": 22,
+     "xhigh": 2,
+     "max": 2
+    },
+    "target": 0.9,
+    "accuracy_vs_max": 0.0,
+    "token_share_vs_max": 0.5815341193367434
+   },
+   {
+    "policy": "router cv5 @ 0.93",
+    "kind": "router",
+    "accuracy": 0.9658536585365853,
+    "tokens_per_task": 953.0780487804878,
+    "usd_per_1k": 1.2026243902439024,
+    "latency_s": 1.940609756097561,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 354,
+     "medium": 14,
+     "high": 25,
+     "xhigh": 10,
+     "max": 7
+    },
+    "target": 0.93,
+    "accuracy_vs_max": 0.0,
+    "token_share_vs_max": 0.5750254577989158
+   },
+   {
+    "policy": "router cv5 @ 0.95",
+    "kind": "router",
+    "accuracy": 0.9682926829268292,
+    "tokens_per_task": 954.8731707317073,
+    "usd_per_1k": 1.2047921951219513,
+    "latency_s": 1.988609756097561,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 338,
+     "medium": 16,
+     "high": 32,
+     "xhigh": 17,
+     "max": 7
+    },
+    "target": 0.95,
+    "accuracy_vs_max": 0.0024390243902439046,
+    "token_share_vs_max": 0.5761085179146384
+   },
+   {
+    "policy": "router cv5 @ 0.97",
+    "kind": "router",
+    "accuracy": 0.9707317073170731,
+    "tokens_per_task": 1240.7731707317073,
+    "usd_per_1k": 1.5480673170731707,
+    "latency_s": 2.5124146341463414,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 123,
+     "medium": 31,
+     "high": 185,
+     "xhigh": 59,
+     "max": 12
+    },
+    "target": 0.97,
+    "accuracy_vs_max": 0.004878048780487809,
+    "token_share_vs_max": 0.7486020283832384
+   }
+  ],
+  "router cv5 + check": [
+   {
+    "policy": "router cv5 + check @ 0.5",
+    "kind": "router",
+    "accuracy": 0.9682926829268292,
+    "tokens_per_task": 965.1121951219512,
+    "usd_per_1k": 1.2196546341463415,
+    "latency_s": 1.9609024390243903,
+    "calls_per_task": 1.0341463414634147,
+    "level_mix": {
+     "low": 405,
+     "medium": 2,
+     "high": 0,
+     "xhigh": 0,
+     "max": 3
+    },
+    "target": 0.5,
+    "accuracy_vs_max": 0.0024390243902439046,
+    "token_share_vs_max": 0.5822860809116541
+   },
+   {
+    "policy": "router cv5 + check @ 0.6",
+    "kind": "router",
+    "accuracy": 0.9682926829268292,
+    "tokens_per_task": 965.1121951219512,
+    "usd_per_1k": 1.2196546341463415,
+    "latency_s": 1.9609024390243903,
+    "calls_per_task": 1.0341463414634147,
+    "level_mix": {
+     "low": 405,
+     "medium": 2,
+     "high": 0,
+     "xhigh": 0,
+     "max": 3
+    },
+    "target": 0.6,
+    "accuracy_vs_max": 0.0024390243902439046,
+    "token_share_vs_max": 0.5822860809116541
+   },
+   {
+    "policy": "router cv5 + check @ 0.7",
+    "kind": "router",
+    "accuracy": 0.9682926829268292,
+    "tokens_per_task": 965.1121951219512,
+    "usd_per_1k": 1.2196546341463415,
+    "latency_s": 1.9609024390243903,
+    "calls_per_task": 1.0341463414634147,
+    "level_mix": {
+     "low": 405,
+     "medium": 2,
+     "high": 0,
+     "xhigh": 0,
+     "max": 3
+    },
+    "target": 0.7,
+    "accuracy_vs_max": 0.0024390243902439046,
+    "token_share_vs_max": 0.5822860809116541
+   },
+   {
+    "policy": "router cv5 + check @ 0.75",
+    "kind": "router",
+    "accuracy": 0.9682926829268292,
+    "tokens_per_task": 965.1121951219512,
+    "usd_per_1k": 1.2196546341463415,
+    "latency_s": 1.9609024390243903,
+    "calls_per_task": 1.0341463414634147,
+    "level_mix": {
+     "low": 405,
+     "medium": 2,
+     "high": 0,
+     "xhigh": 0,
+     "max": 3
+    },
+    "target": 0.75,
+    "accuracy_vs_max": 0.0024390243902439046,
+    "token_share_vs_max": 0.5822860809116541
+   },
+   {
+    "policy": "router cv5 + check @ 0.8",
+    "kind": "router",
+    "accuracy": 0.9682926829268292,
+    "tokens_per_task": 965.1121951219512,
+    "usd_per_1k": 1.2196546341463415,
+    "latency_s": 1.9609024390243903,
+    "calls_per_task": 1.0341463414634147,
+    "level_mix": {
+     "low": 405,
+     "medium": 2,
+     "high": 0,
+     "xhigh": 0,
+     "max": 3
+    },
+    "target": 0.8,
+    "accuracy_vs_max": 0.0024390243902439046,
+    "token_share_vs_max": 0.5822860809116541
+   },
+   {
+    "policy": "router cv5 + check @ 0.85",
+    "kind": "router",
+    "accuracy": 0.9682926829268292,
+    "tokens_per_task": 969.3219512195122,
+    "usd_per_1k": 1.2246117073170733,
+    "latency_s": 1.968,
+    "calls_per_task": 1.0317073170731708,
+    "level_mix": {
+     "low": 399,
+     "medium": 7,
+     "high": 1,
+     "xhigh": 0,
+     "max": 3
+    },
+    "target": 0.85,
+    "accuracy_vs_max": 0.0024390243902439046,
+    "token_share_vs_max": 0.5848259746069493
+   },
+   {
+    "policy": "router cv5 + check @ 0.9",
+    "kind": "router",
+    "accuracy": 0.9658536585365853,
+    "tokens_per_task": 1012.3048780487804,
+    "usd_per_1k": 1.276109268292683,
+    "latency_s": 2.057292682926829,
+    "calls_per_task": 1.0292682926829269,
+    "level_mix": {
+     "low": 372,
+     "medium": 9,
+     "high": 22,
+     "xhigh": 2,
+     "max": 5
+    },
+    "target": 0.9,
+    "accuracy_vs_max": 0.0,
+    "token_share_vs_max": 0.6107590838724107
+   },
+   {
+    "policy": "router cv5 + check @ 0.93",
+    "kind": "router",
+    "accuracy": 0.9658536585365853,
+    "tokens_per_task": 1001.5170731707317,
+    "usd_per_1k": 1.263179512195122,
+    "latency_s": 2.033536585365854,
+    "calls_per_task": 1.0292682926829269,
+    "level_mix": {
+     "low": 351,
+     "medium": 14,
+     "high": 25,
+     "xhigh": 10,
+     "max": 10
+    },
+    "target": 0.93,
+    "accuracy_vs_max": 0.0,
+    "token_share_vs_max": 0.6042504223345831
+   },
+   {
+    "policy": "router cv5 + check @ 0.95",
+    "kind": "router",
+    "accuracy": 0.9682926829268292,
+    "tokens_per_task": 1003.3121951219512,
+    "usd_per_1k": 1.2653473170731706,
+    "latency_s": 2.081536585365854,
+    "calls_per_task": 1.0292682926829269,
+    "level_mix": {
+     "low": 335,
+     "medium": 16,
+     "high": 32,
+     "xhigh": 17,
+     "max": 10
+    },
+    "target": 0.95,
+    "accuracy_vs_max": 0.0024390243902439046,
+    "token_share_vs_max": 0.6053334824503057
+   },
+   {
+    "policy": "router cv5 + check @ 0.97",
+    "kind": "router",
+    "accuracy": 0.9707317073170731,
+    "tokens_per_task": 1284.0219512195122,
+    "usd_per_1k": 1.601561951219512,
+    "latency_s": 2.5930731707317074,
+    "calls_per_task": 1.0170731707317073,
+    "level_mix": {
+     "low": 122,
+     "medium": 30,
+     "high": 185,
+     "xhigh": 59,
+     "max": 14
+    },
+    "target": 0.97,
+    "accuracy_vs_max": 0.004878048780487809,
+    "token_share_vs_max": 0.77469553649736
+   }
+  ],
+  "router loso": [
+   {
+    "policy": "router loso @ 0.5",
+    "kind": "router",
+    "accuracy": 0.9634146341463414,
+    "tokens_per_task": 913.5390243902439,
+    "usd_per_1k": 1.1551365853658537,
+    "latency_s": 1.8611463414634146,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 410,
+     "medium": 0,
+     "high": 0,
+     "xhigh": 0,
+     "max": 0
+    },
+    "target": 0.5,
+    "accuracy_vs_max": -0.0024390243902439046,
+    "token_share_vs_max": 0.5511701758206828
+   },
+   {
+    "policy": "router loso @ 0.6",
+    "kind": "router",
+    "accuracy": 0.9634146341463414,
+    "tokens_per_task": 913.5390243902439,
+    "usd_per_1k": 1.1551365853658537,
+    "latency_s": 1.8611463414634146,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 410,
+     "medium": 0,
+     "high": 0,
+     "xhigh": 0,
+     "max": 0
+    },
+    "target": 0.6,
+    "accuracy_vs_max": -0.0024390243902439046,
+    "token_share_vs_max": 0.5511701758206828
+   },
+   {
+    "policy": "router loso @ 0.7",
+    "kind": "router",
+    "accuracy": 0.9634146341463414,
+    "tokens_per_task": 913.5390243902439,
+    "usd_per_1k": 1.1551365853658537,
+    "latency_s": 1.8611463414634146,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 410,
+     "medium": 0,
+     "high": 0,
+     "xhigh": 0,
+     "max": 0
+    },
+    "target": 0.7,
+    "accuracy_vs_max": -0.0024390243902439046,
+    "token_share_vs_max": 0.5511701758206828
+   },
+   {
+    "policy": "router loso @ 0.75",
+    "kind": "router",
+    "accuracy": 0.9634146341463414,
+    "tokens_per_task": 913.5390243902439,
+    "usd_per_1k": 1.1551365853658537,
+    "latency_s": 1.8611463414634146,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 410,
+     "medium": 0,
+     "high": 0,
+     "xhigh": 0,
+     "max": 0
+    },
+    "target": 0.75,
+    "accuracy_vs_max": -0.0024390243902439046,
+    "token_share_vs_max": 0.5511701758206828
+   },
+   {
+    "policy": "router loso @ 0.8",
+    "kind": "router",
+    "accuracy": 0.9634146341463414,
+    "tokens_per_task": 913.5390243902439,
+    "usd_per_1k": 1.1551365853658537,
+    "latency_s": 1.8611463414634146,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 410,
+     "medium": 0,
+     "high": 0,
+     "xhigh": 0,
+     "max": 0
+    },
+    "target": 0.8,
+    "accuracy_vs_max": -0.0024390243902439046,
+    "token_share_vs_max": 0.5511701758206828
+   },
+   {
+    "policy": "router loso @ 0.85",
+    "kind": "router",
+    "accuracy": 0.9634146341463414,
+    "tokens_per_task": 913.709756097561,
+    "usd_per_1k": 1.15534243902439,
+    "latency_s": 1.8617560975609757,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 407,
+     "medium": 2,
+     "high": 1,
+     "xhigh": 0,
+     "max": 0
+    },
+    "target": 0.85,
+    "accuracy_vs_max": -0.0024390243902439046,
+    "token_share_vs_max": 0.5512731842556022
+   },
+   {
+    "policy": "router loso @ 0.9",
+    "kind": "router",
+    "accuracy": 0.9609756097560975,
+    "tokens_per_task": 919.9463414634147,
+    "usd_per_1k": 1.1628448780487806,
+    "latency_s": 1.8769024390243902,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 362,
+     "medium": 28,
+     "high": 20,
+     "xhigh": 0,
+     "max": 0
+    },
+    "target": 0.9,
+    "accuracy_vs_max": -0.004878048780487809,
+    "token_share_vs_max": 0.5550359352282961
+   },
+   {
+    "policy": "router loso @ 0.93",
+    "kind": "router",
+    "accuracy": 0.9560975609756097,
+    "tokens_per_task": 939.7243902439025,
+    "usd_per_1k": 1.1866429268292682,
+    "latency_s": 1.9023170731707317,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 300,
+     "medium": 24,
+     "high": 86,
+     "xhigh": 0,
+     "max": 0
+    },
+    "target": 0.93,
+    "accuracy_vs_max": -0.009756097560975618,
+    "token_share_vs_max": 0.5669687266391585
+   },
+   {
+    "policy": "router loso @ 0.95",
+    "kind": "router",
+    "accuracy": 0.9560975609756097,
+    "tokens_per_task": 994.5073170731707,
+    "usd_per_1k": 1.2524517073170731,
+    "latency_s": 1.9894634146341463,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 233,
+     "medium": 20,
+     "high": 155,
+     "xhigh": 2,
+     "max": 0
+    },
+    "target": 0.95,
+    "accuracy_vs_max": -0.009756097560975618,
+    "token_share_vs_max": 0.6000211903066119
+   },
+   {
+    "policy": "router loso @ 0.97",
+    "kind": "router",
+    "accuracy": 0.9585365853658536,
+    "tokens_per_task": 1021.9317073170731,
+    "usd_per_1k": 1.2854331707317073,
+    "latency_s": 2.031731707317073,
+    "calls_per_task": 1,
+    "level_mix": {
+     "low": 163,
+     "medium": 16,
+     "high": 221,
+     "xhigh": 10,
+     "max": 0
+    },
+    "target": 0.97,
+    "accuracy_vs_max": -0.007317073170731714,
+    "token_share_vs_max": 0.6165672880527874
+   }
+  ],
+  "router loso + check": [
+   {
+    "policy": "router loso + check @ 0.5",
+    "kind": "router",
+    "accuracy": 0.9682926829268292,
+    "tokens_per_task": 965.1121951219512,
+    "usd_per_1k": 1.2196546341463415,
+    "latency_s": 1.9609024390243903,
+    "calls_per_task": 1.0341463414634147,
+    "level_mix": {
+     "low": 405,
+     "medium": 2,
+     "high": 0,
+     "xhigh": 0,
+     "max": 3
+    },
+    "target": 0.5,
+    "accuracy_vs_max": 0.0024390243902439046,
+    "token_share_vs_max": 0.5822860809116541
+   },
+   {
+    "policy": "router loso + check @ 0.6",
+    "kind": "router",
+    "accuracy": 0.9682926829268292,
+    "tokens_per_task": 965.1121951219512,
+    "usd_per_1k": 1.2196546341463415,
+    "latency_s": 1.9609024390243903,
+    "calls_per_task": 1.0341463414634147,
+    "level_mix": {
+     "low": 405,
+     "medium": 2,
+     "high": 0,
+     "xhigh": 0,
+     "max": 3
+    },
+    "target": 0.6,
+    "accuracy_vs_max": 0.0024390243902439046,
+    "token_share_vs_max": 0.5822860809116541
+   },
+   {
+    "policy": "router loso + check @ 0.7",
+    "kind": "router",
+    "accuracy": 0.9682926829268292,
+    "tokens_per_task": 965.1121951219512,
+    "usd_per_1k": 1.2196546341463415,
+    "latency_s": 1.9609024390243903,
+    "calls_per_task": 1.0341463414634147,
+    "level_mix": {
+     "low": 405,
+     "medium": 2,
+     "high": 0,
+     "xhigh": 0,
+     "max": 3
+    },
+    "target": 0.7,
+    "accuracy_vs_max": 0.0024390243902439046,
+    "token_share_vs_max": 0.5822860809116541
+   },
+   {
+    "policy": "router loso + check @ 0.75",
+    "kind": "router",
+    "accuracy": 0.9682926829268292,
+    "tokens_per_task": 965.1121951219512,
+    "usd_per_1k": 1.2196546341463415,
+    "latency_s": 1.9609024390243903,
+    "calls_per_task": 1.0341463414634147,
+    "level_mix": {
+     "low": 405,
+     "medium": 2,
+     "high": 0,
+     "xhigh": 0,
+     "max": 3
+    },
+    "target": 0.75,
+    "accuracy_vs_max": 0.0024390243902439046,
+    "token_share_vs_max": 0.5822860809116541
+   },
+   {
+    "policy": "router loso + check @ 0.8",
+    "kind": "router",
+    "accuracy": 0.9682926829268292,
+    "tokens_per_task": 965.1121951219512,
+    "usd_per_1k": 1.2196546341463415,
+    "latency_s": 1.9609024390243903,
+    "calls_per_task": 1.0341463414634147,
+    "level_mix": {
+     "low": 405,
+     "medium": 2,
+     "high": 0,
+     "xhigh": 0,
+     "max": 3
+    },
+    "target": 0.8,
+    "accuracy_vs_max": 0.0024390243902439046,
+    "token_share_vs_max": 0.5822860809116541
+   },
+   {
+    "policy": "router loso + check @ 0.85",
+    "kind": "router",
+    "accuracy": 0.9682926829268292,
+    "tokens_per_task": 965.2829268292683,
+    "usd_per_1k": 1.219860487804878,
+    "latency_s": 1.9615121951219512,
+    "calls_per_task": 1.0341463414634147,
+    "level_mix": {
+     "low": 402,
+     "medium": 4,
+     "high": 1,
+     "xhigh": 0,
+     "max": 3
+    },
+    "target": 0.85,
+    "accuracy_vs_max": 0.0024390243902439046,
+    "token_share_vs_max": 0.5823890893465733
+   },
+   {
+    "policy": "router loso + check @ 0.9",
+    "kind": "router",
+    "accuracy": 0.9658536585365853,
+    "tokens_per_task": 967.2926829268292,
+    "usd_per_1k": 1.2217785365853657,
+    "latency_s": 1.9674634146341463,
+    "calls_per_task": 1.026829268292683,
+    "level_mix": {
+     "low": 359,
+     "medium": 29,
+     "high": 19,
+     "xhigh": 0,
+     "max": 3
+    },
+    "target": 0.9,
+    "accuracy_vs_max": 0.0,
+    "token_share_vs_max": 0.5836016457804801
+   },
+   {
+    "policy": "router loso + check @ 0.93",
+    "kind": "router",
+    "accuracy": 0.9609756097560975,
+    "tokens_per_task": 983.5317073170731,
+    "usd_per_1k": 1.2408234146341464,
+    "latency_s": 1.9861463414634146,
+    "calls_per_task": 1.0219512195121951,
+    "level_mix": {
+     "low": 298,
+     "medium": 25,
+     "high": 84,
+     "xhigh": 0,
+     "max": 3
+    },
+    "target": 0.93,
+    "accuracy_vs_max": -0.004878048780487809,
+    "token_share_vs_max": 0.5933992194903731
+   },
+   {
+    "policy": "router loso + check @ 0.95",
+    "kind": "router",
+    "accuracy": 0.9609756097560975,
+    "tokens_per_task": 1038.3146341463414,
+    "usd_per_1k": 1.3066321951219513,
+    "latency_s": 2.0732926829268292,
+    "calls_per_task": 1.0219512195121951,
+    "level_mix": {
+     "low": 231,
+     "medium": 21,
+     "high": 153,
+     "xhigh": 2,
+     "max": 3
+    },
+    "target": 0.95,
+    "accuracy_vs_max": -0.004878048780487809,
+    "token_share_vs_max": 0.6264516831578265
+   },
+   {
+    "policy": "router loso + check @ 0.97",
+    "kind": "router",
+    "accuracy": 0.9609756097560975,
+    "tokens_per_task": 1052.6975609756098,
+    "usd_per_1k": 1.3236741463414634,
+    "latency_s": 2.090170731707317,
+    "calls_per_task": 1.0170731707317073,
+    "level_mix": {
+     "low": 162,
+     "medium": 17,
+     "high": 218,
+     "xhigh": 10,
+     "max": 3
+    },
+    "target": 0.97,
+    "accuracy_vs_max": -0.004878048780487809,
+    "token_share_vs_max": 0.63512940802524
+   }
+  ]
+ },
+ "by_group": {
+  "gsm8k": {
+   "n": 40,
+   "accuracy": {
+    "low": 0.975,
+    "medium": 0.975,
+    "high": 0.975,
+    "xhigh": 0.975,
+    "max": 0.975
+   },
+   "median_tokens": {
+    "low": 238.5,
+    "medium": 219.5,
+    "high": 202.0,
+    "xhigh": 174.0,
+    "max": 176.5
+   },
+   "truncated": {
+    "low": 0,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   }
+  },
+  "math": {
+   "n": 160,
+   "accuracy": {
+    "low": 1.0,
+    "medium": 0.9875,
+    "high": 0.99375,
+    "xhigh": 1.0,
+    "max": 0.99375
+   },
+   "median_tokens": {
+    "low": 365.0,
+    "medium": 430.5,
+    "high": 385.0,
+    "xhigh": 348.5,
+    "max": 313.0
+   },
+   "truncated": {
+    "low": 0,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   }
+  },
+  "competition": {
+   "n": 110,
+   "accuracy": {
+    "low": 0.9454545454545454,
+    "medium": 0.9545454545454546,
+    "high": 0.9818181818181818,
+    "xhigh": 0.9636363636363636,
+    "max": 0.9545454545454546
+   },
+   "median_tokens": {
+    "low": 1135.5,
+    "medium": 1597.0,
+    "high": 1517.0,
+    "xhigh": 1755.5,
+    "max": 1500.0
+   },
+   "truncated": {
+    "low": 0,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 2,
+    "max": 2
+   }
+  },
+  "humaneval": {
+   "n": 50,
+   "accuracy": {
+    "low": 1.0,
+    "medium": 0.98,
+    "high": 0.96,
+    "xhigh": 1.0,
+    "max": 0.98
+   },
+   "median_tokens": {
+    "low": 418.5,
+    "medium": 519.5,
+    "high": 386.5,
+    "xhigh": 327.0,
+    "max": 425.0
+   },
+   "truncated": {
+    "low": 0,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   }
+  },
+  "mbpp": {
+   "n": 50,
+   "accuracy": {
+    "low": 0.84,
+    "medium": 0.86,
+    "high": 0.9,
+    "xhigh": 0.88,
+    "max": 0.88
+   },
+   "median_tokens": {
+    "low": 373.5,
+    "medium": 457.0,
+    "high": 362.5,
+    "xhigh": 440.0,
+    "max": 471.5
+   },
+   "truncated": {
+    "low": 0,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   }
+  }
+ },
+ "cheapest_sufficient_level": {
+  "low": 395,
+  "medium": 6,
+  "none": 8,
+  "high": 1
+ },
+ "flagged_tasks": [
+  "gsm8k-749",
+  "mbpp-143",
+  "mbpp-160",
+  "mbpp-327",
+  "mbpp-374",
+  "mbpp-431"
+ ],
+ "clean_accuracy": {
+  "low": 0.9777227722772277,
+  "medium": 0.9752475247524752,
+  "high": 0.9876237623762376,
+  "xhigh": 0.9876237623762376,
+  "max": 0.9801980198019802
+ },
+ "n_clean": 404,
+ "pareto": [
+  "fixed: low",
+  "router cv5 @ 0.85",
+  "router cv5 @ 0.95",
+  "router cv5 @ 0.97",
+  "low, high if low thinks >3000 tok",
+  "low, high if low thinks >2000 tok"
+ ]
+}
